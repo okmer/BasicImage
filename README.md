@@ -3,8 +3,8 @@ A simple basic image class for .NET6.0. I will be backporting various image mani
 
 Progress report:
 - BaseImage<T>
-- ByteImage (BaseImage<byte>)
-- FloatImage (BaseImage<float>)
+- ByteImage (BaseImage&lt;byte&gt;)
+- FloatImage (BaseImage&lt;float&gt;)
 - BaseImage Extensions
 	- Copy
 	- GetPixel (T[])
