@@ -35,3 +35,14 @@ Progress report:
 		- ToJpegFile (BitmapSource to JPEG file)
 		- ToJpegFile (ByteImage to JPEG file)
 		- ByteImageFromJpeg (JPEG data byte[] to ByteImage)
+- WinForms
+	- ByteImageBitmapExtensions
+		- ToBitmap (ByteImage to Bitmap)
+- Convolution [Experimental]
+	- FloatImageConvolutionExtensions
+		- GaussianBlurFast
+		- GaussianBlurFastSIMD
+		- SobelHorizontal
+		- SobelHorizontalSIMD
+		- SobelVertical
+		- SobelVerticalSIMD
