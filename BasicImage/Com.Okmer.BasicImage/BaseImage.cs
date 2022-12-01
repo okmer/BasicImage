@@ -13,7 +13,7 @@ namespace Com.Okmer.BasicImage
 
         public bool IsValid
         {
-            get { return Data != null && Width > 0 && Height > 0 && Stride > 0; }
+            get { return Data != null && Width > 0 && Height > 0 && Channels > 0; }
         }
 
         public int Stride => Width * Channels;

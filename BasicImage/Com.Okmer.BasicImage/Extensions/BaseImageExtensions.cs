@@ -17,6 +17,8 @@ namespace Com.Okmer.BasicImage
             return result;
         }
 
-        public static T[] GetPixel<T>(this BaseImage<T> image, int x, int y) => image?.Data?.Skip(y * image.Stride + x * image.Channels).Take(image.Channels).ToArray() ?? Array.Empty<T>();
+        public static Span<T> GetPixelSpan<T>(this BaseImage<T> image, int x, int y) => image.Data.AsSpan(y * image.Stride + x * image.Channels, image.Channels);
+
+        public static T[] GetPixelArray<T>(this BaseImage<T> image, int x, int y) => image.GetPixelSpan(x, y).ToArray();
     }
 }
