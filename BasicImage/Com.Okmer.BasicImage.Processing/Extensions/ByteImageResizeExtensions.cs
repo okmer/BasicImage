@@ -28,8 +28,8 @@ namespace Com.Okmer.BasicImage.Processing
 
             var result = new ByteImage(width, height, stride);
 
-            var input = image.Data;
-            var output = result.Data;
+            var input = image.Data ?? throw new ArgumentNullException(nameof(image));
+            var output = result.Data ?? throw new ArgumentNullException(nameof(result));
 
             for (int y = 0; y < height; y++)
             {
@@ -71,8 +71,8 @@ namespace Com.Okmer.BasicImage.Processing
 
             var result = new ByteImage(width, height, width);
 
-            var input = image.Data;
-            var output = result.Data;
+            var input = image.Data ?? throw new ArgumentNullException(nameof(image));
+            var output = result.Data ?? throw new ArgumentNullException(nameof(result));
 
             for (int y = 0; y < height; y++)
             {
@@ -111,8 +111,8 @@ namespace Com.Okmer.BasicImage.Processing
 
             var result = new ByteImage(width, height, stride);
 
-            var input = image.Data;
-            var output = result.Data;
+            var input = image.Data ?? throw new ArgumentNullException(nameof(image));
+            var output = result.Data ?? throw new ArgumentNullException(nameof(result));
 
             var imageLineOffset = new int[scale];
             var imagePixelOffset = new int[scale];
@@ -169,8 +169,8 @@ namespace Com.Okmer.BasicImage.Processing
 
             var result = new ByteImage(width, height, width);
 
-            var input = image.Data;
-            var output = result.Data;
+            var input = image.Data ?? throw new ArgumentNullException(nameof(image));
+            var output = result.Data ?? throw new ArgumentNullException(nameof(result));
 
             var imageLineOffset = new int[scale];
             var imagePixelOffset = new int[scale];

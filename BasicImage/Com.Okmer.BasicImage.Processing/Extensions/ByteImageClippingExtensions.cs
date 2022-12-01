@@ -18,8 +18,8 @@ namespace Com.Okmer.BasicImage.Processing
         {
             var result = new ByteImage(image.Width, image.Height, image.Stride, null);
 
-            byte[] input = image.Data;
-            byte[] output = result.Data;
+            byte[] input = image.Data ?? throw new ArgumentNullException(nameof(image));
+            byte[] output = result.Data ?? throw new ArgumentNullException(nameof(result));
             int length = image.Height * image.Stride;
 
             for (int i = 0; i < length; i++)
@@ -36,7 +36,7 @@ namespace Com.Okmer.BasicImage.Processing
         /// </summary>
         public static void ClipInPlace(this ByteImage image, byte maxValue)
         {
-            byte[] input = image.Data;
+            byte[] input = image.Data ?? throw new ArgumentNullException(nameof(image));
             int length = image.Height * image.Stride;
             for (int i = 0; i < length; i++)
             {
@@ -63,7 +63,7 @@ namespace Com.Okmer.BasicImage.Processing
 
             var maxVector = maxValueVector.vector;
 
-            byte[] input = image.Data;
+            byte[] input = image.Data ?? throw new ArgumentNullException(nameof(image));
             int length = (image.Height * image.Stride) - vectorCount;
 
             for (int i = 0; i < length; i += vectorCount)

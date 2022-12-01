@@ -126,12 +126,13 @@ namespace Com.Okmer.BasicImage.Convolution
             int filterOffsetY = (filterHeight - 1) / 2;
 
             //Create input buffer
-            float[] input = image.Data;
+            float[] input = image.Data ?? throw new ArgumentNullException(nameof(image));
 
             //Create output buffer (with optional initial bias value)
             var result = new FloatImage(image.Width, image.Height, image.Stride, null, image.Padding + addedPadding);
 
-            float[] output = result.Data;
+            float[] output = result.Data ?? throw new ArgumentNullException(nameof(result));
+
             if (doInitFillWithBias)
             {
                 int lenght = image.Height * image.Stride;
@@ -195,6 +196,8 @@ namespace Com.Okmer.BasicImage.Convolution
         private static FloatImage ConvolutionFilterSIMD(FloatImage image,
             float[][] filterMatrix, float biasValue, int addedPadding, bool doInitFillWithBias = false)
         {
+            if (!image.IsValid) throw new ArgumentException("ConvolutionFilterSIMD: Image is NOT valid.");
+
             //Calculate filter size and offset
             int filterHeight = filterMatrix.Length;
             int filterWidth = filterMatrix[0].Length;
@@ -210,12 +213,13 @@ namespace Com.Okmer.BasicImage.Convolution
             }
 
             //Create input buffer
-            float[] input = image.Data;
+            float[] input = image.Data ?? throw new ArgumentNullException(nameof(image));
 
             //Create output buffer (with optional initial bias value)
             var result = new FloatImage(image.Width, image.Height, image.Stride, null, image.Padding + addedPadding);
 
-            float[] output = result.Data;
+            float[] output = result.Data ?? throw new ArgumentNullException(nameof(result));
+
             if (doInitFillWithBias)
             {
                 int lenght = image.Height * image.Stride;
@@ -350,6 +354,6 @@ namespace Com.Okmer.BasicImage.Convolution
             new float[] { 1, 2, 1, }
         };
 
-        private static (float[][] kernel, int size, float sigma, int size2) KernelGaussianBlurNxN = (null, 0, 0, 0);
+        private static (float[][]? kernel, int size, float sigma, int size2) KernelGaussianBlurNxN = (null, 0, 0, 0);
     }
 }

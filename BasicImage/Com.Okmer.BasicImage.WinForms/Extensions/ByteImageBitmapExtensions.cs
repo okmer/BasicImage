@@ -11,6 +11,8 @@ namespace Com.Okmer.BasicImage.WinForms.Extensions
         {
             if (!image.IsValid) throw new ArgumentException("ToBitmap: Image is NOT valid.");
 
+            if (image.Data is null) throw new ArgumentNullException("ToBitmap: Image.Data is Null.");
+
             PixelFormat pixelFormat;
 
             switch (image.Channels)
