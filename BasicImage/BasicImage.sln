@@ -13,13 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Okmer.BasicImageTests", "Com.Okmer.BasicImageTests\Com.Okmer.BasicImageTests.csproj", "{A555AD9D-6823-4ED6-ACF2-660043B6E1F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Com.Okmer.BasicImageTests", "Com.Okmer.BasicImageTests\Com.Okmer.BasicImageTests.csproj", "{A555AD9D-6823-4ED6-ACF2-660043B6E1F0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1FADBE59-4171-4666-9B00-E605C7C291CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Okmer.BasicImage.WinForms", "Com.Okmer.BasicImage.WinForms\Com.Okmer.BasicImage.WinForms.csproj", "{5AEEEC90-390D-4B52-B512-3A25E6487FE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Com.Okmer.BasicImage.WinForms", "Com.Okmer.BasicImage.WinForms\Com.Okmer.BasicImage.WinForms.csproj", "{5AEEEC90-390D-4B52-B512-3A25E6487FE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Okmer.BasicImage.Convolution", "Com.Okmer.BasicImage.Convolution\Com.Okmer.BasicImage.Convolution.csproj", "{7D6A4EB5-6D84-46DD-9916-A34DC5A536FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Com.Okmer.BasicImage.Convolution", "Com.Okmer.BasicImage.Convolution\Com.Okmer.BasicImage.Convolution.csproj", "{7D6A4EB5-6D84-46DD-9916-A34DC5A536FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Okmer.BasicImage.Processing", "Com.Okmer.BasicImage.Processing\Com.Okmer.BasicImage.Processing.csproj", "{FB5F8B6D-8410-4BC7-8925-7B81BCDB0A6B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{7D6A4EB5-6D84-46DD-9916-A34DC5A536FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D6A4EB5-6D84-46DD-9916-A34DC5A536FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D6A4EB5-6D84-46DD-9916-A34DC5A536FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB5F8B6D-8410-4BC7-8925-7B81BCDB0A6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB5F8B6D-8410-4BC7-8925-7B81BCDB0A6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB5F8B6D-8410-4BC7-8925-7B81BCDB0A6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB5F8B6D-8410-4BC7-8925-7B81BCDB0A6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
