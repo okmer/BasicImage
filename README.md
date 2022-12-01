@@ -9,6 +9,15 @@ Progress report:
 	- Copy
 	- GetPixelArray (T[])
 	- GetPixelSpan (Span<T>)
+	- GetLineArray (T[])
+	- GetLineSpan (Span<T>)
+- BaseImage Processing Extensions
+	- FlipX
+	- FlipY
+	- SwapXY
+	- Rotate90
+	- Rotate180
+	- Rotate270
 - WPF
 	- ByteImageWriteableBitmapExtensions
 		- ToWriteableBitmap (ByteImage to WriteableBitmap)
