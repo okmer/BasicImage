@@ -7,7 +7,8 @@ Progress report:
 - FloatImage (BaseImage&lt;float&gt;)
 - BaseImage Extensions
 	- Copy
-	- GetPixel (T[])
+	- GetPixelArray (T[])
+	- GetPixelSpan (Span<T>)
 - WPF
 	- ByteImageWriteableBitmapExtensions
 		- ToWriteableBitmap (ByteImage to WriteableBitmap)
