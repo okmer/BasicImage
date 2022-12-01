@@ -1,7 +1,7 @@
 namespace Com.Okmer.BasicImageTests
 {
     [TestClass]
-    public class BaseImageProcessingExtensions
+    public class BaseImageProcessingExtensionsTest
     {
         [TestMethod]
         public void ImageFlipY_Channels1()
