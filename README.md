@@ -28,11 +28,11 @@ Progress report:
 		- ToPng (ByteImage to PNG data byte[])
 		- ToPngFile (BitmapSource to PNG file)
 		- ToPngFile (ByteImage to PNG file)
-		- ByteImageFromPng (PNG data byte[] to ByteImage)
+		- ByteImageFromPng (PNG data byte[] to ByteImage)ClipInPlxadwddd
 	 - ByteImageJpegExtensions
 		- ToJpeg (BitmapSource to JPEG data byte[])
 		- ToJpeg (ByteImage to JPEG data byte[])
-		- ToJpegFile (BitmapSource to JPEG file)
+		- ToJpegFile (BitmapSource to JPEG file)dwd
 		- ToJpegFile (ByteImage to JPEG file)
 		- ByteImageFromJpeg (JPEG data byte[] to ByteImage)
 - WinForms
@@ -46,3 +46,11 @@ Progress report:
 		- SobelHorizontalSIMD
 		- SobelVertical
 		- SobelVerticalSIMD
+- Processing
+	- ByteImageClippingExtensions
+		- Clip
+		- ClipInPlace
+		- ClipInPlaceSIMD
+	- ByteImageResizeExtensions
+		- ResizeHalf
+		- Resize
