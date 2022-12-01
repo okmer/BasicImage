@@ -8,6 +8,11 @@ namespace Com.Okmer.BasicImage
 {
     public class FloatImage : BaseImage<float>
     {
-        public FloatImage(int width, int height, int channels, float[]? data = null) : base(width, height, channels, data) {}
+        public int Padding { get; set; } = 0;
+
+        public FloatImage(int width, int height, int channels, float[]? data = null, int padding = 0) : base(width, height, channels, data)
+        {
+            Padding = padding;
+        }
     }
 }
