@@ -56,6 +56,13 @@ namespace Com.Okmer.BaseImage.SampleApp
             OutputImage.Source = output.ToBitmapSource();
         }
 
+        private void SwapXY_Click(object sender, RoutedEventArgs e)
+        {
+            using var image = inputImage.ToByteImage();
+            using var output = image.SwapXY();
+            OutputImage.Source = output.ToBitmapSource();
+        }
+
         private void Rotate90_Click(object sender, RoutedEventArgs e)
         {
             using var image = inputImage.ToByteImage();

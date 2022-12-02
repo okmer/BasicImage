@@ -19,6 +19,7 @@
             <Button x:Name="Copy" Content="Copy" Click="Copy_Click"/>
             <Button x:Name="FlipX" Content="FlipX" Click="FlipX_Click"/>
             <Button x:Name="FlipY" Content="FlipY" Click="FlipY_Click"/>
+            <Button x:Name="SwapXY" Content="SwapXY" Click="SwapXY_Click"/>
             <Button x:Name="Rotate90" Content="Rotate 90" Click="Rotate90_Click"/>
             <Button x:Name="Rotate180" Content="Rotate 180" Click="Rotate180_Click"/>
             <Button x:Name="Rotate270" Content="Rotate 270" Click="Rotate270_Click"/>
