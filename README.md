@@ -1,7 +1,7 @@
 # BasicImage
 A simple basic image class for .NET6.0. I will be backporting various image manipulations and converters (to other image formats) when I have time. I’m really missing a basic (frontend independent) image class in the .NET ecosystem. This is my personal fix within multiple projects.
 
-![ScreenShot](https://user-images.githubusercontent.com/3484773/205310049-7da8cd1d-1c08-4ea3-8ade-4dc5afec152f.png)
+![image](https://user-images.githubusercontent.com/3484773/205339662-e9053a0f-e348-409a-a26d-2b21bdadaf91.png)
 
 Progress report:
 - BaseImage<T>
