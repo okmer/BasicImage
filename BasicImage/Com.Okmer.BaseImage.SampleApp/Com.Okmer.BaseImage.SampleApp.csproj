@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="testimage.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Com.Okmer.BasicImage.Convolution\Com.Okmer.BasicImage.Convolution.csproj" />
+    <ProjectReference Include="..\Com.Okmer.BasicImage.Processing\Com.Okmer.BasicImage.Processing.csproj" />
+    <ProjectReference Include="..\Com.Okmer.BasicImage.WPF\Com.Okmer.BasicImage.WPF.csproj" />
+    <ProjectReference Include="..\Com.Okmer.BasicImage\Com.Okmer.BasicImage.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="testimage.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>

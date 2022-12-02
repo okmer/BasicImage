@@ -6,9 +6,9 @@ namespace Com.Okmer.BasicImage.WPF
 {
     public static class ByteImageWriteableBitmapExtensions
     {
-        public static Int32Rect GetFullFrameRectangle(this ByteImage image, int xOffset = 0, int yOffset = 0) => new Int32Rect(xOffset, yOffset, image.Width, image.Height);
+        public static Int32Rect GetFullFrameRectangle(this BaseImage<byte> image, int xOffset = 0, int yOffset = 0) => new Int32Rect(xOffset, yOffset, image.Width, image.Height);
 
-        public static WriteableBitmap ToWriteableBitmap(this ByteImage image)
+        public static WriteableBitmap ToWriteableBitmap(this BaseImage<byte> image)
         {
             PixelFormat pixelFormat;
 
@@ -34,12 +34,12 @@ namespace Com.Okmer.BasicImage.WPF
             return result;
         }
 
-        public static BitmapSource ToBitmapSource(this ByteImage image) => image.ToWriteableBitmap();
+        public static BitmapSource ToBitmapSource(this BaseImage<byte> image) => image.ToWriteableBitmap();
 
-        public static ByteImage ToByteImage(this BitmapSource bitmap)
+        public static BaseImage<byte> ToByteImage(this BitmapSource bitmap)
         {
             var bytesPerPixel = (bitmap.Format.BitsPerPixel + 7) / 8;
-            var result = new ByteImage(bitmap.PixelWidth, bitmap.PixelHeight, bytesPerPixel);
+            var result = new BaseImage<byte>(bitmap.PixelWidth, bitmap.PixelHeight, bytesPerPixel);
             bitmap.CopyPixels(result.Data, result.Stride, 0);
             return result;
         }

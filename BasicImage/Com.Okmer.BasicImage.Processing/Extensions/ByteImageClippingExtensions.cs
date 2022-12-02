@@ -14,9 +14,9 @@ namespace Com.Okmer.BasicImage.Processing
         /// Clip pixel values to maxValue
         /// </summary>
         /// <returns>ByteImage, clipped to maxValue</returns>
-        public static ByteImage Clip(this ByteImage image, byte maxValue)
+        public static BaseImage<byte> Clip(this BaseImage<byte> image, byte maxValue)
         {
-            var result = new ByteImage(image.Width, image.Height, image.Stride, null);
+            var result = new BaseImage<byte>(image.Width, image.Height, image.Stride, null);
 
             byte[] input = image.Data ?? throw new ArgumentNullException(nameof(image));
             byte[] output = result.Data ?? throw new ArgumentNullException(nameof(result));
@@ -34,7 +34,7 @@ namespace Com.Okmer.BasicImage.Processing
         /// <summary>
         /// In place clip pixel values to maxValue
         /// </summary>
-        public static void ClipInPlace(this ByteImage image, byte maxValue)
+        public static void ClipInPlace(this BaseImage<byte> image, byte maxValue)
         {
             byte[] input = image.Data ?? throw new ArgumentNullException(nameof(image));
             int length = image.Height * image.Stride;
@@ -49,7 +49,7 @@ namespace Com.Okmer.BasicImage.Processing
 
         private static (Vector<byte> vector, byte value) maxValueVector = (new Vector<byte>(), 255);
 
-        public static void ClipInPlaceSIMD(this ByteImage image, byte maxValue)
+        public static void ClipInPlaceSIMD(this BaseImage<byte> image, byte maxValue)
         {
             if (maxValue == 255) return;
 

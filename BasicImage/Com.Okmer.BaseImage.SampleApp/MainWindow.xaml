@@ -1,0 +1,23 @@
+﻿<Window x:Class="Com.Okmer.BaseImage.SampleApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Com.Okmer.BaseImage.SampleApp"
+        mc:Ignorable="d"
+        Title="BaseImage Sample App" Height="700" Width="700">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="640"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <Image x:Name="InputImage" Width="640" Height="338"/>
+            <Image x:Name="OutputImage" Width="640"  Height="338"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <Button x:Name="Copy" Content="Copy" Click="Copy_Click"/>
+            <Button x:Name="FlipX" Content="FlipX" Click="FlipX_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Com.Okmer.BasicImage.Convol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Okmer.BasicImage.Processing", "Com.Okmer.BasicImage.Processing\Com.Okmer.BasicImage.Processing.csproj", "{FB5F8B6D-8410-4BC7-8925-7B81BCDB0A6B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Okmer.BaseImage.SampleApp", "Com.Okmer.BaseImage.SampleApp\Com.Okmer.BaseImage.SampleApp.csproj", "{868C3A18-EDC1-435A-814E-F3A7D544E8BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{FB5F8B6D-8410-4BC7-8925-7B81BCDB0A6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB5F8B6D-8410-4BC7-8925-7B81BCDB0A6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB5F8B6D-8410-4BC7-8925-7B81BCDB0A6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{868C3A18-EDC1-435A-814E-F3A7D544E8BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{868C3A18-EDC1-435A-814E-F3A7D544E8BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{868C3A18-EDC1-435A-814E-F3A7D544E8BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{868C3A18-EDC1-435A-814E-F3A7D544E8BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

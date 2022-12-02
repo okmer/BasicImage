@@ -7,7 +7,7 @@ namespace Com.Okmer.BasicImage.WinForms.Extensions
 {
     public static class ByteImageBitmapExtensions
     {
-        public static Bitmap ToBitmap(this ByteImage image)
+        public static Bitmap ToBitmap(this BaseImage<byte> image)
         {
             if (!image.IsValid) throw new ArgumentException("ToBitmap: Image is NOT valid.");
 

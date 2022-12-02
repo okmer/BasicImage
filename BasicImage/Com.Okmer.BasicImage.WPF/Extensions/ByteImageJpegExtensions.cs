@@ -21,7 +21,7 @@ namespace Com.Okmer.BasicImage.WPF
             }
         }
 
-        public static byte[] ToJpeg(this ByteImage image, int quality = 100) => ToJpeg(image.ToWriteableBitmap(), quality);
+        public static byte[] ToJpeg(this BaseImage<byte> image, int quality = 100) => ToJpeg(image.ToWriteableBitmap(), quality);
 
         public static void ToJpegFile(this BitmapSource image, string fileName, int quality = 100)
         {
@@ -31,16 +31,16 @@ namespace Com.Okmer.BasicImage.WPF
             }
         }
 
-        public static void ToJpegFile(this ByteImage image, string fileName, int quality = 100) => ToJpegFile(image.ToWriteableBitmap(), fileName, quality);
+        public static void ToJpegFile(this BaseImage<byte> image, string fileName, int quality = 100) => ToJpegFile(image.ToWriteableBitmap(), fileName, quality);
 
-        public static ByteImage ByteImageFromJpeg(this byte[] data)
+        public static BaseImage<byte> ByteImageFromJpeg(this byte[] data)
         {
             using (var input = new MemoryStream(data))
             {
                 var decoder = new JpegBitmapDecoder(input, BitmapCreateOptions.None, BitmapCacheOption.None);
                 BitmapFrame frame = decoder.Frames[0];
                 var bytesPerPixel = (frame.Format.BitsPerPixel + 7) / 8;
-                var image = new ByteImage(frame.PixelWidth, frame.PixelHeight, bytesPerPixel);
+                var image = new BaseImage<byte>(frame.PixelWidth, frame.PixelHeight, bytesPerPixel);
                 frame.CopyPixels(image.Data, image.Stride, 0);
                 return image;
             }

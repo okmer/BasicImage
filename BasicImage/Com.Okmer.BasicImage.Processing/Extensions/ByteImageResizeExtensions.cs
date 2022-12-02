@@ -13,7 +13,7 @@ namespace Com.Okmer.BasicImage.Processing
         /// </summary>
         /// <returns>WeldFinderImage with a a scaled image.</returns>
         /// <see cref="http://tech-algorithm.com/articles/nearest-neighbor-image-scaling/"/>
-        public static ByteImage ResizeHalf(this ByteImage image)
+        public static BaseImage<byte> ResizeHalf(this BaseImage<byte> image)
         {
             if (image.Channels == 1) return image.ResizeHalfGray();
 
@@ -26,7 +26,7 @@ namespace Com.Okmer.BasicImage.Processing
             var height = imageHeight / 2;
             var stride = imageStride / 2;
 
-            var result = new ByteImage(width, height, stride);
+            var result = new BaseImage<byte>(width, height, stride);
 
             var input = image.Data ?? throw new ArgumentNullException(nameof(image));
             var output = result.Data ?? throw new ArgumentNullException(nameof(result));
@@ -57,7 +57,7 @@ namespace Com.Okmer.BasicImage.Processing
             return result;
         }
 
-        private static ByteImage ResizeHalfGray(this ByteImage image)
+        private static BaseImage<byte> ResizeHalfGray(this BaseImage<byte> image)
         {
             if (image.Channels > 1)
                 throw new ArgumentException("ResizedHalfGray supports one byte per pixel images only.");
@@ -69,7 +69,7 @@ namespace Com.Okmer.BasicImage.Processing
             var width = imageWidth / 2;
             var height = imageHeight / 2;
 
-            var result = new ByteImage(width, height, width);
+            var result = new BaseImage<byte>(width, height, width);
 
             var input = image.Data ?? throw new ArgumentNullException(nameof(image));
             var output = result.Data ?? throw new ArgumentNullException(nameof(result));
@@ -96,7 +96,7 @@ namespace Com.Okmer.BasicImage.Processing
             return result;
         }
 
-        public static ByteImage Resize(this ByteImage image, int scale)
+        public static BaseImage<byte> Resize(this BaseImage<byte> image, int scale)
         {
             if (image.Channels == 1) return image.ResizeGray(scale);
 
@@ -109,7 +109,7 @@ namespace Com.Okmer.BasicImage.Processing
             var height = imageHeight / scale;
             var stride = imageStride / scale;
 
-            var result = new ByteImage(width, height, stride);
+            var result = new BaseImage<byte>(width, height, stride);
 
             var input = image.Data ?? throw new ArgumentNullException(nameof(image));
             var output = result.Data ?? throw new ArgumentNullException(nameof(result));
@@ -155,7 +155,7 @@ namespace Com.Okmer.BasicImage.Processing
             return result;
         }
 
-        private static ByteImage ResizeGray(this ByteImage image, int scale)
+        private static BaseImage<byte> ResizeGray(this BaseImage<byte> image, int scale)
         {
             if (image.Channels > 1)
                 throw new ArgumentException("ResizedHalfGray supports one byte per pixel images only.");
@@ -167,7 +167,7 @@ namespace Com.Okmer.BasicImage.Processing
             var width = imageWidth / scale;
             var height = imageHeight / scale;
 
-            var result = new ByteImage(width, height, width);
+            var result = new BaseImage<byte>(width, height, width);
 
             var input = image.Data ?? throw new ArgumentNullException(nameof(image));
             var output = result.Data ?? throw new ArgumentNullException(nameof(result));

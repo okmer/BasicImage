@@ -12,12 +12,16 @@ namespace Com.Okmer.BasicImage.Convolution
 {
     public static class FloatImageConvolutionExtensions
     {
-        public static FloatImage GaussianBlurFast(this FloatImage image, int kernelSize, float kernelSigma)
+        public static PaddedImage<float> GaussianBlurFast(this BaseImage<float> image, int kernelSize, float kernelSigma) => GaussianBlurFast(new PaddedImage<float>(image), kernelSize, kernelSigma);
+
+        public static PaddedImage<float> GaussianBlurFastSIMD(this BaseImage<float> image, int kernelSize, float kernelSigma) => GaussianBlurFastSIMD(new PaddedImage<float>(image), kernelSize, kernelSigma);
+
+        public static PaddedImage<float> GaussianBlurFast(this PaddedImage<float> image, int kernelSize, float kernelSigma)
         {
             return ImageGaussianBlurFilterFast(image, kernelSize, kernelSigma);
         }
 
-        public static FloatImage GaussianBlurFastSIMD(this FloatImage image, int kernelSize, float kernelSigma)
+        public static PaddedImage<float> GaussianBlurFastSIMD(this PaddedImage<float> image, int kernelSize, float kernelSigma)
         {
             return ImageGaussianBlurFilterFastSIMD(image, kernelSize, kernelSigma);
         }
@@ -26,7 +30,7 @@ namespace Com.Okmer.BasicImage.Convolution
         /// "Fast" gaussian blur filter for image data as a 1D byte array ("Fast" -> Fixed low number of kernel columns)
         /// </summary>
         /// <returns>FloatImage, containing the gaussian blur filtered image</returns>
-        private static FloatImage ImageGaussianBlurFilterFast(FloatImage image,
+        private static PaddedImage<float> ImageGaussianBlurFilterFast(PaddedImage<float> image,
         int kernelSize, float kernelSigma)
         {
             if (KernelGaussianBlurNxN.size != kernelSize || KernelGaussianBlurNxN.sigma != kernelSigma)
@@ -38,7 +42,7 @@ namespace Com.Okmer.BasicImage.Convolution
                 KernelGaussianBlurNxN.kernel, 0, (kernelSize - 1) / 2); //Fixed width of 3
         }
 
-        private static FloatImage ImageGaussianBlurFilterFastSIMD(FloatImage image,
+        private static PaddedImage<float> ImageGaussianBlurFilterFastSIMD(PaddedImage<float> image,
         int kernelSize, float kernelSigma)
         {
             if (KernelGaussianBlurNxN.size != kernelSize || KernelGaussianBlurNxN.sigma != kernelSigma)
@@ -54,12 +58,16 @@ namespace Com.Okmer.BasicImage.Convolution
         /// Horizontal Sobel filter
         /// </summary>
         /// <returns>FloatImage, containing the horizontal sobel filtered image</returns>
-        public static FloatImage SobelHorizontal(this FloatImage image, byte bias = 127)
+        public static PaddedImage<float> SobelHorizontal(this BaseImage<float> image, byte bias = 127) => SobelHorizontal(new PaddedImage<float>(image), bias);
+
+        public static PaddedImage<float> SobelHorizontalSIMD(this BaseImage<float> image, byte bias = 127) => SobelHorizontalSIMD(new PaddedImage<float>(image), bias);
+
+        public static PaddedImage<float> SobelHorizontal(this PaddedImage<float> image, byte bias = 127)
         {
             return ImageSobelHorizontalFilter(image, bias);
         }
 
-        public static FloatImage SobelHorizontalSIMD(this FloatImage image, byte bias = 127)
+        public static PaddedImage<float> SobelHorizontalSIMD(this PaddedImage<float> image, byte bias = 127)
         {
             return ImageSobelHorizontalFilterSIMD(image, bias);
         }
@@ -68,12 +76,12 @@ namespace Com.Okmer.BasicImage.Convolution
         /// Horizontal sobel filter for image data as a 1D byte array
         /// </summary>
         /// <returns>FloatImage, containing the horizontal sobel filtered image</returns>
-        private static FloatImage ImageSobelHorizontalFilter(FloatImage image, byte bias = 127)
+        private static PaddedImage<float> ImageSobelHorizontalFilter(PaddedImage<float> image, byte bias = 127)
         {
             return ConvolutionFilter(image,KernelSobel3x3Horizontal, bias, 1);
         }
 
-        private static FloatImage ImageSobelHorizontalFilterSIMD(FloatImage image, byte bias = 127)
+        private static PaddedImage<float> ImageSobelHorizontalFilterSIMD(PaddedImage<float> image, byte bias = 127)
         {
             return ConvolutionFilterSIMD(image, KernelSobel3x3Horizontal, bias, 1);
         }
@@ -82,12 +90,12 @@ namespace Com.Okmer.BasicImage.Convolution
         /// Vertical Sobel filter
         /// </summary>
         /// <returns>FloatImage, containing the vertical sobel filtered image</returns>
-        public static FloatImage SobelVertical(this FloatImage image, byte bias = 127)
+        public static BaseImage<float> SobelVertical(this BaseImage<float> image, byte bias = 127)
         {
             return ImageSobelVerticalFilter(image, bias);
         }
 
-        public static FloatImage SobelVerticalSIMD(this FloatImage image, byte bias = 127)
+        public static BaseImage<float> SobelVerticalSIMD(this BaseImage<float> image, byte bias = 127)
         {
             return ImageSobelVerticalFilterSIMD(image, bias);
         }
@@ -96,12 +104,16 @@ namespace Com.Okmer.BasicImage.Convolution
         /// Vertical sobel filter for image data as a 1D byte array
         /// </summary>
         /// <returns>FloatImage, containing the vertical sobel filtered image</returns>
-        private static FloatImage ImageSobelVerticalFilter(FloatImage image, byte bias = 127)
+        private static PaddedImage<float> ImageSobelVerticalFilter(BaseImage<float> image, byte bias = 127) => ImageSobelVerticalFilter(new PaddedImage<float>(image), bias);
+
+        private static PaddedImage<float> ImageSobelVerticalFilterSIMD(BaseImage<float> image, byte bias = 127) => ImageSobelVerticalFilterSIMD(new PaddedImage<float>(image), bias);
+
+        private static PaddedImage<float> ImageSobelVerticalFilter(PaddedImage<float> image, byte bias = 127)
         {
             return ConvolutionFilter(image, KernelSobel3x3Vertical, bias, 1);
         }
 
-        private static FloatImage ImageSobelVerticalFilterSIMD(FloatImage image, byte bias = 127)
+        private static PaddedImage<float> ImageSobelVerticalFilterSIMD(PaddedImage<float> image, byte bias = 127)
         {
             return ConvolutionFilterSIMD(image, KernelSobel3x3Vertical, bias, 1);
         }
@@ -115,7 +127,7 @@ namespace Com.Okmer.BasicImage.Convolution
         /// <param name="bias">Pixel value offset (is added to the pixel value)</param>
         /// <param name="addedPadding">Additional padding of the image sides</param>
         /// <returns>FloatImage, containing the processed image</returns>
-        private static FloatImage ConvolutionFilter(FloatImage image,
+        private static PaddedImage<float> ConvolutionFilter(PaddedImage<float> image,
             float[][] filterMatrix, float biasValue, int addedPadding, bool doInitFillWithBias = false)
         {
             //Calculate filter size and offset
@@ -129,7 +141,7 @@ namespace Com.Okmer.BasicImage.Convolution
             float[] input = image.Data ?? throw new ArgumentNullException(nameof(image));
 
             //Create output buffer (with optional initial bias value)
-            var result = new FloatImage(image.Width, image.Height, image.Stride, null, image.Padding + addedPadding);
+            var result = new PaddedImage<float>(image.Width, image.Height, image.Stride, null, image.Padding + addedPadding);
 
             float[] output = result.Data ?? throw new ArgumentNullException(nameof(result));
 
@@ -193,7 +205,7 @@ namespace Com.Okmer.BasicImage.Convolution
         private static readonly Vector<float> maxVector = new Vector<float>(Enumerable.Repeat(255.0f, Vector<float>.Count).ToArray());
         private static (Vector<float> vector, float value) biasValueVector = (new Vector<float>(Enumerable.Repeat(0.0f, Vector<float>.Count).ToArray()), 0.0f);
 
-        private static FloatImage ConvolutionFilterSIMD(FloatImage image,
+        private static PaddedImage<float> ConvolutionFilterSIMD(PaddedImage<float> image,
             float[][] filterMatrix, float biasValue, int addedPadding, bool doInitFillWithBias = false)
         {
             if (!image.IsValid) throw new ArgumentException("ConvolutionFilterSIMD: Image is NOT valid.");
@@ -216,7 +228,7 @@ namespace Com.Okmer.BasicImage.Convolution
             float[] input = image.Data ?? throw new ArgumentNullException(nameof(image));
 
             //Create output buffer (with optional initial bias value)
-            var result = new FloatImage(image.Width, image.Height, image.Stride, null, image.Padding + addedPadding);
+            var result = new PaddedImage<float>(image.Width, image.Height, image.Stride, null, image.Padding + addedPadding);
 
             float[] output = result.Data ?? throw new ArgumentNullException(nameof(result));
 
