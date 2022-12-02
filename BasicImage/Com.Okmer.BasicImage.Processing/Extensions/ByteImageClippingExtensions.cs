@@ -18,8 +18,8 @@ namespace Com.Okmer.BasicImage.Processing
         {
             var result = new BaseImage<byte>(image.Width, image.Height, image.Channels, null);
 
-            byte[] input = image.Data ?? throw new ArgumentNullException(nameof(image));
-            byte[] output = result.Data ?? throw new ArgumentNullException(nameof(result));
+            byte[] input = image.Data;
+            byte[] output = result.Data;
             int length = image.Height * image.Stride;
 
             for (int i = 0; i < length; i++)

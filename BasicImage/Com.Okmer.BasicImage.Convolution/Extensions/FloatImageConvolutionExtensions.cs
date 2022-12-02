@@ -132,12 +132,12 @@ namespace Com.Okmer.BasicImage.Convolution
             int filterOffsetY = (filterHeight - 1) / 2;
 
             //Create input buffer
-            float[] input = image.Data ?? throw new ArgumentNullException(nameof(image));
+            float[] input = image.Data;
 
             //Create output buffer (with optional initial bias value)
             var result = new PaddedImage<float>(image.Width, image.Height, image.Channels, null, image.Padding + addedPadding);
 
-            float[] output = result.Data ?? throw new ArgumentNullException(nameof(result));
+            float[] output = result.Data;
 
             if (doInitFillWithBias)
             {
@@ -219,12 +219,12 @@ namespace Com.Okmer.BasicImage.Convolution
             }
 
             //Create input buffer
-            float[] input = image.Data ?? throw new ArgumentNullException(nameof(image));
+            float[] input = image.Data;
 
             //Create output buffer (with optional initial bias value)
             var result = new PaddedImage<float>(image.Width, image.Height, image.Channels, null, image.Padding + addedPadding);
 
-            float[] output = result.Data ?? throw new ArgumentNullException(nameof(result));
+            float[] output = result.Data;
 
             if (doInitFillWithBias)
             {

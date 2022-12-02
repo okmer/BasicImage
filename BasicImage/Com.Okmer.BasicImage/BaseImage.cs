@@ -6,15 +6,12 @@ namespace Com.Okmer.BasicImage
     {
         private readonly ArrayPool<T>? sharedPool = null;
 
-        public int Width { get; }
-        public int Height { get; }
-        public int Channels { get; }
-        public T[]? Data { get; }
+        public int Width { get; private set; }
+        public int Height { get; private set; }
+        public int Channels { get; private set; }
+        public T[] Data { get; private set; }
 
-        public bool IsValid
-        {
-            get { return Data is not null && Width > 0 && Height > 0 && Channels > 0; }
-        }
+        public bool IsValid => Data is not null && Data.Length > 0 && Width > 0 && Height > 0 && Channels > 0;
 
         public int Stride => Width * Channels;
 
@@ -23,12 +20,15 @@ namespace Com.Okmer.BasicImage
             Width = width;
             Height = height;
             Channels = channels;
-            Data = data;
 
-            if (Data == null)
+            if (data is null)
             {
                 sharedPool = ArrayPool<T>.Shared;
                 Data = sharedPool.Rent(Height * Stride);
+            }
+            else
+            {
+                Data = data;
             }
         }
 
@@ -39,10 +39,15 @@ namespace Com.Okmer.BasicImage
         {
             if (!disposedValue)
             {
-                if (disposing && Data is not null)
+                if (disposing && Data is not null && Data.Length > 0)
                 {
                     sharedPool?.Return(Data);
                 }
+
+                Width = 0;
+                Height = 0;
+                Channels = 0;
+                Data = Array.Empty<T>();
 
                 disposedValue = true;
             }

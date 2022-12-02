@@ -19,7 +19,7 @@ namespace Com.Okmer.BasicImage.Processing
             int width = image.Width;
             int height = image.Height;
             int channels = image.Channels;
-            byte[]? data = result.Data ?? throw new NullReferenceException($"AveragedChannel: Data of {nameof(result)} is Null");
+            byte[]? data = result.Data;
 
             for (int y = 0; y < height; y++)
             {
@@ -46,8 +46,8 @@ namespace Com.Okmer.BasicImage.Processing
 
             int length = image.Height * image.Stride;
 
-            byte[]? input = image.Data ?? throw new NullReferenceException($"ToFloatImage: Data of {nameof(image)} is Null");
-            float[]? output = result.Data ?? throw new NullReferenceException($"ToFloatImage: Data of {nameof(result)} is Null");
+            byte[]? input = image.Data;
+            float[]? output = result.Data;
 
             for (int i=0; i<length; i++)
             {
