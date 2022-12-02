@@ -33,8 +33,8 @@
             <Button x:Name="Blue" Content="Blue" Click="Blue_Click"/>
             <Button x:Name="FloatAndBack" Content="Float and Back" Click="FloatAndBack_Click"/>
             <Button x:Name="GaussianBlur" Content="Gaussian Blur" Click="GaussianBlur_Click"/>
-            <Button x:Name="SobelHorizontal" Content="Sobal Horizontal" Click="SobelHorizontal_Click"/>
-            <Button x:Name="SobelVertical" Content="Sobal Vertical" Click="SobelVertical_Click"/>
+            <Button x:Name="SobelHorizontal" Content="Sobel Horizontal" Click="SobelHorizontal_Click"/>
+            <Button x:Name="SobelVertical" Content="Sobel Vertical" Click="SobelVertical_Click"/>
         </StackPanel>
     </Grid>
 </Window>
