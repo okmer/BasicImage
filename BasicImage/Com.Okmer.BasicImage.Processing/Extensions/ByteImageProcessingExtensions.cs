@@ -38,7 +38,7 @@ namespace Com.Okmer.BasicImage.Processing
             return result;
         }
 
-        public static BaseImage<float> ToFloatImage(this BaseImage<byte> image, float multiplier)
+        public static BaseImage<float> ToFloatImage(this BaseImage<byte> image, float multiplier = 1.0f)
         {
             if (!image.IsValid) throw new ArgumentException($"ToFloatImage: Image {nameof(image)} is NOT valid.");
 

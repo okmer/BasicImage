@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 using Com.Okmer.BaseImage;
 using Com.Okmer.BasicImage;
+using Com.Okmer.BasicImage.Convolution;
 using Com.Okmer.BasicImage.Processing;
 using Com.Okmer.BasicImage.WPF;
 
@@ -55,10 +56,24 @@ namespace Com.Okmer.BaseImage.SampleApp
             OutputImage.Source = output.ToBitmapSource();
         }
 
+        private void Rotate90_Click(object sender, RoutedEventArgs e)
+        {
+            using var image = inputImage.ToByteImage();
+            using var output = image.Rotate90();
+            OutputImage.Source = output.ToBitmapSource();
+        }
+
         private void Rotate180_Click(object sender, RoutedEventArgs e)
         {
             using var image = inputImage.ToByteImage();
             using var output = image.Rotate180();
+            OutputImage.Source = output.ToBitmapSource();
+        }
+
+        private void Rotate270_Click(object sender, RoutedEventArgs e)
+        {
+            using var image = inputImage.ToByteImage();
+            using var output = image.Rotate270();
             OutputImage.Source = output.ToBitmapSource();
         }
 
@@ -115,6 +130,48 @@ namespace Com.Okmer.BaseImage.SampleApp
         {
             using var image = inputImage.ToByteImage();
             using var output = image.SingleChannel(0);
+            OutputImage.Source = output.ToBitmapSource();
+        }
+
+        private void FloatAndBack_Click(object sender, RoutedEventArgs e)
+        {
+            using var image = inputImage.ToByteImage();
+            using var floatImage = image.ToFloatImage();
+            using var output = floatImage.ToByteImage();
+
+            OutputImage.Source = output.ToBitmapSource();
+        }
+
+        private void GaussianBlur_Click(object sender, RoutedEventArgs e)
+        {
+            using var image = inputImage.ToByteImage();
+            using var grayImage = image.AveragedChannel();
+            using var floatImage = grayImage.ToFloatImage();
+            using var floatOutput = floatImage.GaussianBlurFastSIMD(11, 2.50f);
+            using var output = floatOutput.ToByteImage();
+
+            OutputImage.Source = output.ToBitmapSource();
+        }
+
+        private void SobelHorizontal_Click(object sender, RoutedEventArgs e)
+        {
+            using var image = inputImage.ToByteImage();
+            using var grayImage = image.AveragedChannel();
+            using var floatImage = grayImage.ToFloatImage();
+            using var floatOutput = floatImage.SobelHorizontalSIMD();
+            using var output = floatOutput.ToByteImage();
+
+            OutputImage.Source = output.ToBitmapSource();
+        }
+
+        private void SobelVertical_Click(object sender, RoutedEventArgs e)
+        {
+            using var image = inputImage.ToByteImage();
+            using var grayImage = image.AveragedChannel();
+            using var floatImage = grayImage.ToFloatImage();
+            using var floatOutput = floatImage.SobelVerticalSIMD();
+            using var output = floatOutput.ToByteImage();
+
             OutputImage.Source = output.ToBitmapSource();
         }
     }
