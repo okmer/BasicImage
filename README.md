@@ -1,16 +1,19 @@
 # BasicImage
 A simple basic image class for .NET6.0. I will be backporting various image manipulations and converters (to other image formats) when I have time. I’m really missing a basic (frontend independent) image class in the .NET ecosystem. This is my personal fix within multiple projects.
 
+![ScreenShot](https://user-images.githubusercontent.com/3484773/205310049-7da8cd1d-1c08-4ea3-8ade-4dc5afec152f.png)
+
 Progress report:
 - BaseImage<T>
 - ByteImage (BaseImage&lt;byte&gt;)
 - FloatImage (BaseImage&lt;float&gt;)
 - BaseImage Extensions
-	- Copy
-	- GetPixelArray (T[])
-	- GetPixelSpan (Span<T>)
-	- GetLineArray (T[])
-	- GetLineSpan (Span<T>)
+	- Copy (BaseImage<T>)
+	- SingleChannel (BaseImage<T>)
+	- PixelArray (T[])
+	- PixelSpan (Span<T>)
+	- LineArray (T[])
+	- LineSpan (Span<T>)
 - BaseImage Processing Extensions
 	- FlipX
 	- FlipY
@@ -47,6 +50,12 @@ Progress report:
 		- SobelVertical
 		- SobelVerticalSIMD
 - Processing
+	- ByteImageProcessingExtensions
+		- ToFloatImage
+		- AveragedChannel
+	- FloatImageProcessingExtensions
+		- ToByteImage
+		- AveragedChannel
 	- ByteImageClippingExtensions
 		- Clip
 		- ClipInPlace
