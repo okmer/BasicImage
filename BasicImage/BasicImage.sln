@@ -9,6 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Com.Okmer.BasicImage.WPF", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8CB4A5A9-7016-42E0-830E-7C2720C41534}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\OneDrive - Allseas Engineering BV\Pictures\BaseImageSampleApp.png = ..\..\..\..\OneDrive - Allseas Engineering BV\Pictures\BaseImageSampleApp.png
 		..\LICENSE = ..\LICENSE
 		..\README.md = ..\README.md
 	EndProjectSection
@@ -21,9 +22,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Com.Okmer.BasicImage.WinFor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Com.Okmer.BasicImage.Convolution", "Com.Okmer.BasicImage.Convolution\Com.Okmer.BasicImage.Convolution.csproj", "{7D6A4EB5-6D84-46DD-9916-A34DC5A536FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Okmer.BasicImage.Processing", "Com.Okmer.BasicImage.Processing\Com.Okmer.BasicImage.Processing.csproj", "{FB5F8B6D-8410-4BC7-8925-7B81BCDB0A6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Com.Okmer.BasicImage.Processing", "Com.Okmer.BasicImage.Processing\Com.Okmer.BasicImage.Processing.csproj", "{FB5F8B6D-8410-4BC7-8925-7B81BCDB0A6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Okmer.BaseImage.SampleApp", "Com.Okmer.BaseImage.SampleApp\Com.Okmer.BaseImage.SampleApp.csproj", "{868C3A18-EDC1-435A-814E-F3A7D544E8BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Com.Okmer.BaseImage.SampleApp", "Com.Okmer.BaseImage.SampleApp\Com.Okmer.BaseImage.SampleApp.csproj", "{868C3A18-EDC1-435A-814E-F3A7D544E8BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
