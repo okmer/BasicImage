@@ -24,6 +24,10 @@
             <Button x:Name="ClipInPlaceSIMD127" Content="Clip In Place 127" Click="ClipInPlaceSIMD127_Click"/>
             <Button x:Name="ResizeHalf" Content="Resize Half" Click="ResizeHalf_Click"/>
             <Button x:Name="ResizeOneFifth" Content="Resize 1/5" Click="ResizeOneFifth_Click"/>
+            <Button x:Name="Grey" Content="Grey (Average)" Click="Grey_Click"/>
+            <Button x:Name="Red" Content="Red" Click="Red_Click"/>
+            <Button x:Name="Green" Content="Green" Click="Green_Click"/>
+            <Button x:Name="Blue" Content="Blue" Click="Blue_Click"/>
         </StackPanel>
     </Grid>
 </Window>

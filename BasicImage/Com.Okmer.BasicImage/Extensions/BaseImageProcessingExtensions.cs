@@ -45,7 +45,7 @@ namespace Com.Okmer.BasicImage
 
                 for (int y = 0; y < height; y++)
                 {
-                    copy.GetLineSpan(y).Reverse();
+                    copy.LineSpan(y).Reverse();
                 }
 
                 return copy;
@@ -59,7 +59,7 @@ namespace Com.Okmer.BasicImage
                 for (int x = 0; x < width; x++)
                 {
                     int x_inverted = (width - 1) - x;
-                    image.GetPixelSpan(x, y).CopyTo(result.GetPixelSpan(x_inverted, y));
+                    image.PixelSpan(x, y).CopyTo(result.PixelSpan(x_inverted, y));
                 }
             }
 
@@ -79,7 +79,7 @@ namespace Com.Okmer.BasicImage
             {
                 for (int x = 0; x < width; x++)
                 {
-                    image.GetPixelSpan(x, y).CopyTo(result.GetPixelSpan(y, x));
+                    image.PixelSpan(x, y).CopyTo(result.PixelSpan(y, x));
                 }
             }
 
@@ -100,7 +100,7 @@ namespace Com.Okmer.BasicImage
                 int y_inverted = (height - 1) - y;
                 for (int x = 0; x < width; x++)
                 {
-                    image.GetPixelSpan(x, y).CopyTo(result.GetPixelSpan(y_inverted, x));
+                    image.PixelSpan(x, y).CopyTo(result.PixelSpan(y_inverted, x));
                 }
             }
 
@@ -121,7 +121,7 @@ namespace Com.Okmer.BasicImage
                 int x_inverted = (width - 1) - x;
                 for (int y = 0; y < height; y++)
                 {
-                    image.GetPixelSpan(x, y).CopyTo(result.GetPixelSpan(y, x_inverted));
+                    image.PixelSpan(x, y).CopyTo(result.PixelSpan(y, x_inverted));
                 }
             }
 
@@ -143,7 +143,7 @@ namespace Com.Okmer.BasicImage
                 for (int x = 0; x < width; x++)
                 {
                     int x_inverted = (width - 1) - x;
-                    image.GetPixelSpan(x, y).CopyTo(result.GetPixelSpan(x_inverted, y_inverted));
+                    image.PixelSpan(x, y).CopyTo(result.PixelSpan(x_inverted, y_inverted));
                 }
             }
 

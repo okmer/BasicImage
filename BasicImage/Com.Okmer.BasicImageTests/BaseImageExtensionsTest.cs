@@ -39,9 +39,9 @@ namespace Com.Okmer.BasicImageTests
 
             using var image = new BaseImage<byte>(width, height, channels, data);
 
-            var pixel1 = image.GetPixelSpan(0, 0);
-            var pixel5 = image.GetPixelSpan(1, 1);
-            var pixel9 = image.GetPixelSpan(2, 2);
+            var pixel1 = image.PixelSpan(0, 0);
+            var pixel5 = image.PixelSpan(1, 1);
+            var pixel9 = image.PixelSpan(2, 2);
 
             Assert.IsTrue(image.IsValid);
             Assert.IsNotNull(image.Data);
@@ -69,9 +69,9 @@ namespace Com.Okmer.BasicImageTests
 
             using var image = new BaseImage<byte>(width, height, channels, data);
 
-            var pixel1 = image.GetPixelSpan(0, 0);
-            var pixel2 = image.GetPixelSpan(1, 0);
-            var pixel3 = image.GetPixelSpan(2, 0);
+            var pixel1 = image.PixelSpan(0, 0);
+            var pixel2 = image.PixelSpan(1, 0);
+            var pixel3 = image.PixelSpan(2, 0);
 
             Assert.IsTrue(image.IsValid);
             Assert.IsNotNull(image.Data);
@@ -107,9 +107,9 @@ namespace Com.Okmer.BasicImageTests
 
             using var image = new BaseImage<byte>(width, height, channels, data);
 
-            var line1 = image.GetLineSpan(0);
-            var line2 = image.GetLineSpan(1);
-            var line3 = image.GetLineSpan(2);
+            var line1 = image.LineSpan(0);
+            var line2 = image.LineSpan(1);
+            var line3 = image.LineSpan(2);
 
             Assert.IsTrue(image.IsValid);
             Assert.IsNotNull(image.Data);
@@ -137,9 +137,9 @@ namespace Com.Okmer.BasicImageTests
 
             using var image = new BaseImage<byte>(width, height, channels, data);
 
-            var line1 = image.GetLineSpan(0);
-            var line2 = image.GetLineSpan(1);
-            var line3 = image.GetLineSpan(2);
+            var line1 = image.LineSpan(0);
+            var line2 = image.LineSpan(1);
+            var line3 = image.LineSpan(2);
 
             Assert.IsTrue(image.IsValid);
             Assert.IsNotNull(image.Data);

@@ -89,5 +89,33 @@ namespace Com.Okmer.BaseImage.SampleApp
             using var output = image.Resize(5);
             OutputImage.Source = output.ToBitmapSource();
         }
+
+        private void Grey_Click(object sender, RoutedEventArgs e)
+        {
+            using var image = inputImage.ToByteImage();
+            using var output = image.AveragedChannel();
+            OutputImage.Source = output.ToBitmapSource();
+        }
+
+        private void Red_Click(object sender, RoutedEventArgs e)
+        {
+            using var image = inputImage.ToByteImage();
+            using var output = image.SingleChannel(2);
+            OutputImage.Source = output.ToBitmapSource();
+        }
+
+        private void Green_Click(object sender, RoutedEventArgs e)
+        {
+            using var image = inputImage.ToByteImage();
+            using var output = image.SingleChannel(1);
+            OutputImage.Source = output.ToBitmapSource();
+        }
+
+        private void Blue_Click(object sender, RoutedEventArgs e)
+        {
+            using var image = inputImage.ToByteImage();
+            using var output = image.SingleChannel(0);
+            OutputImage.Source = output.ToBitmapSource();
+        }
     }
 }
