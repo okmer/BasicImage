@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 using Com.Okmer.BaseImage;
 using Com.Okmer.BasicImage;
+using Com.Okmer.BasicImage.Processing;
 using Com.Okmer.BasicImage.WPF;
 
 namespace Com.Okmer.BaseImage.SampleApp
@@ -44,6 +45,48 @@ namespace Com.Okmer.BaseImage.SampleApp
         {
             using var image = inputImage.ToByteImage();
             using var output = image.FlipX();
+            OutputImage.Source = output.ToBitmapSource();
+        }
+
+        private void FlipY_Click(object sender, RoutedEventArgs e)
+        {
+            using var image = inputImage.ToByteImage();
+            using var output = image.FlipY();
+            OutputImage.Source = output.ToBitmapSource();
+        }
+
+        private void Rotate180_Click(object sender, RoutedEventArgs e)
+        {
+            using var image = inputImage.ToByteImage();
+            using var output = image.Rotate180();
+            OutputImage.Source = output.ToBitmapSource();
+        }
+
+        private void Clip127_Click(object sender, RoutedEventArgs e)
+        {
+            using var image = inputImage.ToByteImage();
+            using var output = image.Clip(127);
+            OutputImage.Source = output.ToBitmapSource();
+        }
+
+        private void ClipInPlaceSIMD127_Click(object sender, RoutedEventArgs e)
+        {
+            using var image = inputImage.ToByteImage();
+            image.ClipInPlaceSIMD(127);
+            OutputImage.Source = image.ToBitmapSource();
+        }
+
+        private void ResizeHalf_Click(object sender, RoutedEventArgs e)
+        {
+            using var image = inputImage.ToByteImage();
+            using var output = image.ResizeHalf();
+            OutputImage.Source = output.ToBitmapSource();
+        }
+
+        private void ResizeOneFifth_Click(object sender, RoutedEventArgs e)
+        {
+            using var image = inputImage.ToByteImage();
+            using var output = image.Resize(5);
             OutputImage.Source = output.ToBitmapSource();
         }
     }

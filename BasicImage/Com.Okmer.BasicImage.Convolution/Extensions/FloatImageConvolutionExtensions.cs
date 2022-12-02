@@ -141,7 +141,7 @@ namespace Com.Okmer.BasicImage.Convolution
             float[] input = image.Data ?? throw new ArgumentNullException(nameof(image));
 
             //Create output buffer (with optional initial bias value)
-            var result = new PaddedImage<float>(image.Width, image.Height, image.Stride, null, image.Padding + addedPadding);
+            var result = new PaddedImage<float>(image.Width, image.Height, image.Channels, null, image.Padding + addedPadding);
 
             float[] output = result.Data ?? throw new ArgumentNullException(nameof(result));
 
@@ -228,7 +228,7 @@ namespace Com.Okmer.BasicImage.Convolution
             float[] input = image.Data ?? throw new ArgumentNullException(nameof(image));
 
             //Create output buffer (with optional initial bias value)
-            var result = new PaddedImage<float>(image.Width, image.Height, image.Stride, null, image.Padding + addedPadding);
+            var result = new PaddedImage<float>(image.Width, image.Height, image.Channels, null, image.Padding + addedPadding);
 
             float[] output = result.Data ?? throw new ArgumentNullException(nameof(result));
 

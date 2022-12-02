@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Com.Okmer.BaseImage.SampleApp"
         mc:Ignorable="d"
-        Title="BaseImage Sample App" Height="700" Width="700">
+        Title="BaseImage Sample App" Height="740" Width="740">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="640"/>
@@ -18,6 +18,12 @@
         <StackPanel Grid.Column="1">
             <Button x:Name="Copy" Content="Copy" Click="Copy_Click"/>
             <Button x:Name="FlipX" Content="FlipX" Click="FlipX_Click"/>
+            <Button x:Name="FlipY" Content="FlipY" Click="FlipY_Click"/>
+            <Button x:Name="Rotate180" Content="Rotate 180" Click="Rotate180_Click"/>
+            <Button x:Name="Clip127" Content="Clip 128" Click="Clip127_Click"/>
+            <Button x:Name="ClipInPlaceSIMD127" Content="Clip In Place 127" Click="ClipInPlaceSIMD127_Click"/>
+            <Button x:Name="ResizeHalf" Content="Resize Half" Click="ResizeHalf_Click"/>
+            <Button x:Name="ResizeOneFifth" Content="Resize 1/5" Click="ResizeOneFifth_Click"/>
         </StackPanel>
     </Grid>
 </Window>

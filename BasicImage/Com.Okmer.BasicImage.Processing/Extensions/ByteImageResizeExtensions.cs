@@ -20,13 +20,13 @@ namespace Com.Okmer.BasicImage.Processing
             var imageWidth = image.Width;
             var imageHeight = image.Height;
             var imageStride = image.Stride;
-            var bytesPerPixel = image.Channels;
+            var channels = image.Channels;
 
             var width = imageWidth / 2;
             var height = imageHeight / 2;
             var stride = imageStride / 2;
 
-            var result = new BaseImage<byte>(width, height, stride);
+            var result = new BaseImage<byte>(width, height, channels);
 
             var input = image.Data ?? throw new ArgumentNullException(nameof(image));
             var output = result.Data ?? throw new ArgumentNullException(nameof(result));
@@ -39,11 +39,11 @@ namespace Com.Okmer.BasicImage.Processing
 
                 for (int x = 0; x < width; x++)
                 {
-                    var pixel = x * bytesPerPixel;
-                    var imagePixelOffset1 = 2 * x * bytesPerPixel;
-                    var imagePixelOffset2 = imagePixelOffset1 + bytesPerPixel;
+                    var pixel = x * channels;
+                    var imagePixelOffset1 = 2 * x * channels;
+                    var imagePixelOffset2 = imagePixelOffset1 + channels;
 
-                    for (int i = 0; i < bytesPerPixel; i++)
+                    for (int i = 0; i < channels; i++)
                     {
                         output[lineOffset + pixel + i] = (byte)((
                                                         input[imageLineOffset1 + imagePixelOffset1 + i] +
@@ -65,11 +65,12 @@ namespace Com.Okmer.BasicImage.Processing
             var imageWidth = image.Width;
             var imageHeight = image.Height;
             var imageStride = image.Stride;
+            var channels = image.Channels;
 
             var width = imageWidth / 2;
             var height = imageHeight / 2;
 
-            var result = new BaseImage<byte>(width, height, width);
+            var result = new BaseImage<byte>(width, height, channels);
 
             var input = image.Data ?? throw new ArgumentNullException(nameof(image));
             var output = result.Data ?? throw new ArgumentNullException(nameof(result));
@@ -103,13 +104,13 @@ namespace Com.Okmer.BasicImage.Processing
             var imageWidth = image.Width;
             var imageHeight = image.Height;
             var imageStride = image.Stride;
-            var bytesPerPixel = image.Channels;
+            var channels = image.Channels;
 
             var width = imageWidth / scale;
             var height = imageHeight / scale;
             var stride = imageStride / scale;
 
-            var result = new BaseImage<byte>(width, height, stride);
+            var result = new BaseImage<byte>(width, height, channels);
 
             var input = image.Data ?? throw new ArgumentNullException(nameof(image));
             var output = result.Data ?? throw new ArgumentNullException(nameof(result));
@@ -130,15 +131,15 @@ namespace Com.Okmer.BasicImage.Processing
 
                 for (int x = 0; x < width; x++)
                 {
-                    imagePixelOffset[0] = scale * x * bytesPerPixel;
+                    imagePixelOffset[0] = scale * x * channels;
                     for (int p = 1; p < scale; p++)
                     {
-                        imagePixelOffset[p] = imagePixelOffset[p - 1] + bytesPerPixel;
+                        imagePixelOffset[p] = imagePixelOffset[p - 1] + channels;
                     }
 
-                    var pixelOffset = x * bytesPerPixel;
+                    var pixelOffset = x * channels;
 
-                    for (int i = 0; i < bytesPerPixel; i++)
+                    for (int i = 0; i < channels; i++)
                     {
                         value = 0;
                         for (int r = 0; r < scale; r++)
@@ -163,11 +164,12 @@ namespace Com.Okmer.BasicImage.Processing
             var imageWidth = image.Width;
             var imageHeight = image.Height;
             var imageStride = image.Stride;
+            var channels = image.Channels;
 
             var width = imageWidth / scale;
             var height = imageHeight / scale;
 
-            var result = new BaseImage<byte>(width, height, width);
+            var result = new BaseImage<byte>(width, height, channels);
 
             var input = image.Data ?? throw new ArgumentNullException(nameof(image));
             var output = result.Data ?? throw new ArgumentNullException(nameof(result));

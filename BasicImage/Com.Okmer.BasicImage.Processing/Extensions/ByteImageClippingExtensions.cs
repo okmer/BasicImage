@@ -16,7 +16,7 @@ namespace Com.Okmer.BasicImage.Processing
         /// <returns>ByteImage, clipped to maxValue</returns>
         public static BaseImage<byte> Clip(this BaseImage<byte> image, byte maxValue)
         {
-            var result = new BaseImage<byte>(image.Width, image.Height, image.Stride, null);
+            var result = new BaseImage<byte>(image.Width, image.Height, image.Channels, null);
 
             byte[] input = image.Data ?? throw new ArgumentNullException(nameof(image));
             byte[] output = result.Data ?? throw new ArgumentNullException(nameof(result));
