@@ -6,14 +6,14 @@ namespace Com.Okmer.BasicImage
     {
         private readonly ArrayPool<T>? sharedPool = null;
 
-        public int Width { get; private set; }
-        public int Height { get; private set; }
-        public int Channels { get; private set; }
-        public T[] Data { get; private set; }
-
-        public bool IsValid => Data is not null && Data.Length > 0 && Width > 0 && Height > 0 && Channels > 0;
+        public int Width { get; private set; } = 0;
+        public int Height { get; private set; } = 0;
+        public int Channels { get; private set; } = 0;
+        public T[] Data { get; private set; } = Array.Empty<T>();
 
         public int Stride => Width * Channels;
+
+        public virtual bool IsValid => Data.Length >= Width * Height * Channels;
 
         public BaseImage(int width, int height, int channels, T[]? data = null)
         {
@@ -28,6 +28,8 @@ namespace Com.Okmer.BasicImage
             }
             else
             {
+                if (data.Length < Width * Height * Channels) throw new ArgumentOutOfRangeException($"BaseImage: Data buffer {nameof(data)} is to small for the image dimensions.");
+
                 Data = data;
             }
         }
@@ -39,9 +41,9 @@ namespace Com.Okmer.BasicImage
         {
             if (!disposedValue)
             {
-                if (disposing && Data is not null && Data.Length > 0)
+                if (disposing && Data.Length > 0)
                 {
-                    sharedPool?.Return(Data);
+                    sharedPool?.Return(Data); //Only return Data if sharedPool is not Null.
                 }
 
                 Width = 0;
