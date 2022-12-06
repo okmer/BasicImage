@@ -4,7 +4,7 @@ namespace Com.Okmer.BasicImageTests;
 public class BaseImageProcessingExtensionsTest
 {
     [TestMethod]
-    public void ImageFlipY_Channels1()
+    public void FlipY_Channels1()
     {
         var input = new byte[] {
             1, 2, 3,
@@ -25,7 +25,7 @@ public class BaseImageProcessingExtensionsTest
     }
 
     [TestMethod]
-    public void ImageFlipX_Channels1()
+    public void FlipX_Channels1()
     {
         var input = new byte[] {
             1, 2, 3,
@@ -46,7 +46,7 @@ public class BaseImageProcessingExtensionsTest
     }
 
     [TestMethod]
-    public void ImageFlipX_Channels3()
+    public void FlipX_Channels3()
     {
         var input = new byte[] {
             1, 2, 3,  4, 5, 6,  7, 8, 9,
@@ -67,7 +67,7 @@ public class BaseImageProcessingExtensionsTest
     }
 
     [TestMethod]
-    public void ImageSwapXY_Channels1()
+    public void SwapXY_Channels1()
     {
         var input = new byte[] {
             1, 2, 3,
@@ -88,7 +88,7 @@ public class BaseImageProcessingExtensionsTest
     }
 
     [TestMethod]
-    public void ImageRotate90_3x3_Channels1()
+    public void Rotate90_3x3_Channels1()
     {
         var input = new byte[] {
             1, 2, 3,
@@ -109,7 +109,7 @@ public class BaseImageProcessingExtensionsTest
     }
 
     [TestMethod]
-    public void ImageRotate90_1x3_Channels3()
+    public void Rotate90_1x3_Channels3()
     {
         var input = new byte[] {
             1, 2, 3,
@@ -134,7 +134,7 @@ public class BaseImageProcessingExtensionsTest
     }
 
     [TestMethod]
-    public void ImageRotate90_3x1_Channels3()
+    public void Rotate90_3x1_Channels3()
     {
         var input = new byte[] {
             1, 2, 3,
@@ -158,7 +158,7 @@ public class BaseImageProcessingExtensionsTest
         CollectionAssert.AreEqual(rotated.Data?.Take(output.Length).ToArray(), output);
     }
 
-    public void ImageRotate90_3x3_Channels3()
+    public void Rotate90_3x3_Channels3()
     {
         var input = new byte[] {
             1, 2, 3,  4, 5, 6,  7, 8, 9,
@@ -183,7 +183,7 @@ public class BaseImageProcessingExtensionsTest
     }
 
     [TestMethod]
-    public void ImageRotate270_3x3_Channels1()
+    public void Rotate270_3x3_Channels1()
     {
         var input = new byte[] {
             1, 2, 3,
@@ -204,7 +204,7 @@ public class BaseImageProcessingExtensionsTest
     }
 
     [TestMethod]
-    public void ImageRotate270_1x3_Channels3()
+    public void Rotate270_1x3_Channels3()
     {
         var input = new byte[] {
             1, 2, 3,
@@ -229,7 +229,7 @@ public class BaseImageProcessingExtensionsTest
     }
 
     [TestMethod]
-    public void ImageRotate270_3x1_Channels3()
+    public void Rotate270_3x1_Channels3()
     {
         var input = new byte[] {
             1, 2, 3,
@@ -253,7 +253,7 @@ public class BaseImageProcessingExtensionsTest
         CollectionAssert.AreEqual(rotated.Data?.Take(output.Length).ToArray(), output);
     }
 
-    public void ImageRotate270_3x3_Channels3()
+    public void Rotate270_3x3_Channels3()
     {
         var input = new byte[] {
             1, 2, 3,  4, 5, 6,  7, 8, 9,
@@ -274,7 +274,7 @@ public class BaseImageProcessingExtensionsTest
     }
 
     [TestMethod]
-    public void ImageRotate180_Channels1()
+    public void Rotate180_Channels1()
     {
         var input = new byte[] {
             1, 2, 3,
@@ -295,7 +295,7 @@ public class BaseImageProcessingExtensionsTest
     }
 
     [TestMethod]
-    public void ImageRotate180_1x3_Channels3()
+    public void Rotate180_1x3_Channels3()
     {
         var input = new byte[] {
             1, 2, 3,
@@ -316,7 +316,7 @@ public class BaseImageProcessingExtensionsTest
     }
 
     [TestMethod]
-    public void ImageRotate180_3x1_Channels3()
+    public void Rotate180_3x1_Channels3()
     {
         var input = new byte[] {
             1, 2, 3,
@@ -337,7 +337,7 @@ public class BaseImageProcessingExtensionsTest
     }
 
     [TestMethod]
-    public void ImageRotate180_3x3_Channels3()
+    public void Rotate180_3x3_Channels3()
     {
         var input = new byte[] {
             1, 2, 3,  4, 5, 6,  7, 8, 9,

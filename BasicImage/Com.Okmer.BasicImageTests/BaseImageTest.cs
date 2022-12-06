@@ -4,7 +4,7 @@ namespace Com.Okmer.BasicImageTests;
 public class BaseImageTest
 {
     [TestMethod]
-    public void CreateBaseImage()
+    public void Create()
     {
         int width = 640;
         int height = 480;

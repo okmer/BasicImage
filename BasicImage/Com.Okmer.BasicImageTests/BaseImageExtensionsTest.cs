@@ -3,12 +3,10 @@ namespace Com.Okmer.BasicImageTests;
 [TestClass]
 public class BaseImageExtensionsTest
 {
-    [TestMethod]
-    public void CopyImage()
+    public void Copy_Channels(int channels)
     {
         int width = 640;
         int height = 480;
-        int channels = 3;
 
         using var image = new BaseImage<byte>(width, height, channels);
 
@@ -26,7 +24,33 @@ public class BaseImageExtensionsTest
     }
 
     [TestMethod]
-    public void GetPixelSpan_Channels1()
+    public void Copy_Channels1() => Copy_Channels(1);
+
+    [TestMethod]
+    public void Copy_Channels3() => Copy_Channels(3);
+
+    [TestMethod]
+    public void Clear()
+    {
+        var input = new byte[] {
+            1, 2, 3,
+            4, 5, 6,
+            7, 8, 9 };
+
+        var cleared = new byte[] {
+            0, 0, 0,
+            0, 0, 0,
+            0, 0, 0 };
+
+        using var image = new BaseImage<byte>(3, 3, 1, input);
+
+        image.Clear();
+
+        CollectionAssert.AreEqual(image.Data?.Take(input.Length).ToArray(), cleared);
+    }
+
+    [TestMethod]
+    public void PixelSpan_Channels1()
     {
         int width = 3;
         int height = 3;
@@ -56,7 +80,7 @@ public class BaseImageExtensionsTest
     }
 
     [TestMethod]
-    public void GetPixelSpan_Channels3()
+    public void PixelSpan_Channels3()
     {
         int width = 3;
         int height = 1;
@@ -94,7 +118,7 @@ public class BaseImageExtensionsTest
     }
 
     [TestMethod]
-    public void GetLineSpan_Channels1()
+    public void LineSpan_Channels1()
     {
         int width = 3;
         int height = 3;
@@ -124,7 +148,7 @@ public class BaseImageExtensionsTest
     }
 
     [TestMethod]
-    public void GetLineSpan_Channels3()
+    public void LineSpan_Channels3()
     {
         int width = 3;
         int height = 3;
