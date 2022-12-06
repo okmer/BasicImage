@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Com.Okmer.BasicImage.Convolution\Com.Okmer.BasicImage.Convolution.csproj" />
     <ProjectReference Include="..\Com.Okmer.BasicImage\Com.Okmer.BasicImage.csproj" />
   </ItemGroup>
 
