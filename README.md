@@ -9,6 +9,7 @@ Progress report:
 - FloatImage (BaseImage&lt;float&gt;)
 - BaseImage Extensions
 	- Copy (BaseImage<T>)
+	- Clear
 	- SingleChannel (BaseImage<T>)
 	- PixelArray (T[])
 	- PixelSpan (Span<T>)
@@ -49,6 +50,8 @@ Progress report:
 		- SobelHorizontalSIMD
 		- SobelVertical
 		- SobelVerticalSIMD
+	- PaddedImageExtensions
+		- ClearPadding
 - Processing
 	- ByteImageProcessingExtensions
 		- ToFloatImage
