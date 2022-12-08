@@ -34,25 +34,30 @@ public class BaseImage<T> : IDisposable
         }
     }
 
+    ~BaseImage()
+    {
+        Dispose(false);
+    }
+
     #region IDisposable Support
     private bool disposedValue = false;
 
     protected virtual void Dispose(bool disposing)
     {
-        if (!disposedValue)
+        if (disposedValue) return;
+
+        if (Data.Length > 0)
         {
-            if (disposing && Data.Length > 0)
-            {
-                sharedPool?.Return(Data); //Only return Data if sharedPool is not Null (hence the '?.').
-            }
-
-            Width = 0;
-            Height = 0;
-            Channels = 0;
-            Data = Array.Empty<T>();
-
-            disposedValue = true;
+            sharedPool?.Return(Data); //Only return Data if sharedPool is not Null (hence the '?.').
         }
+
+        Data = Array.Empty<T>();
+
+        Width = 0;
+        Height = 0;
+        Channels = 0;
+
+        disposedValue = true;
     }
 
     public void Dispose()
