@@ -1,4 +1,5 @@
 using Com.Okmer.BasicImage;
+using Com.Okmer.BasicImage.Processing;
 using System.Threading.Channels;
 
 namespace Com.Okmer.BasicImageTests;
@@ -323,5 +324,32 @@ public class BaseImageExtensionsTest
             1, 2, 3,  4, 5, 6,  7, 8, 9,
             11, 12, 13,  14, 15, 16,  17, 18, 19,
             21, 22, 23,  24, 25, 26,  27, 28, 29, });
+    }
+
+    [TestMethod]
+    public void Split_Merge_Channel3()
+    {
+        int width = 3;
+        int height = 3;
+        int channels = 3;
+
+        var data = new byte[] {
+            1, 2, 3,  4, 5, 6,  7, 8, 9,
+            11, 12, 13,  14, 15, 16,  17, 18, 19,
+            21, 22, 23,  24, 25, 26,  27, 28, 29, };
+
+        using var image = new BaseImage<byte>(width, height, channels, data);
+
+        var split = image.SplitChannels();
+
+        var merge = split.MergeChannels();
+
+        Assert.IsTrue(merge.IsValid);
+        Assert.IsNotNull(merge.Data);
+        Assert.AreEqual(merge.Width, width);
+        Assert.AreEqual(merge.Height, height);
+        Assert.AreEqual(merge.Channels, channels);
+
+        CollectionAssert.AreEqual(image.Data.Take(width * height * channels).ToArray(), merge.Data.Take(width * height * channels).ToArray());
     }
 }

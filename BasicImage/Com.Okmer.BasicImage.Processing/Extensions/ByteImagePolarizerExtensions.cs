@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Com.Okmer.BasicImage.Processing.Extensions
+namespace Com.Okmer.BasicImage.Processing
 {
     public static class ByteImagePolarizerExtensions
     {
@@ -26,7 +26,7 @@ namespace Com.Okmer.BasicImage.Processing.Extensions
 
             for(int h=0; h<polarizersHorizontal; h++)
             {
-                for (int v = 0; v < polarizersHorizontal; v++)
+                for (int v = 0; v < polarizersVectical; v++)
                 {
                     images.Add(new BaseImage<T>(width / polarizersHorizontal, height / polarizersVectical, channels));
                 }
