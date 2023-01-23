@@ -103,7 +103,7 @@ public static class BaseImageExtensions
 
                 for (int x = 0; x < width; x++)
                 {
-                    imageSpan[imageOffsetY + x * channels + c] = imageSpan[channelOffsetY + x];
+                    imageSpan[imageOffsetY + x * channels + c] = channelSpan[channelOffsetY + x];
                 }
             }
         }

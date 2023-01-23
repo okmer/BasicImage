@@ -1,3 +1,6 @@
+using Com.Okmer.BasicImage;
+using System.Threading.Channels;
+
 namespace Com.Okmer.BasicImageTests;
 
 [TestClass]
@@ -175,5 +178,150 @@ public class BaseImageExtensionsTest
         CollectionAssert.AreEqual(line1.ToArray(), data.Take(width * channels).ToArray());
         CollectionAssert.AreEqual(line2.ToArray(), data.Skip(width * channels).Take(width * channels).ToArray());
         CollectionAssert.AreEqual(line3.ToArray(), data.Skip(2 * width * channels).Take(width * channels).ToArray());
+    }
+
+    [TestMethod]
+    public void Single_Channel3()
+    {
+        int width = 3;
+        int height = 3;
+        int channels = 3;
+
+        var data = new byte[] {
+            1, 2, 3,  4, 5, 6,  7, 8, 9,
+            11, 12, 13,  14, 15, 16,  17, 18, 19,
+            21, 22, 23,  24, 25, 26,  27, 28, 29, };
+
+        using var image = new BaseImage<byte>(width, height, channels, data);
+
+        var split1 = image.SingleChannel(0);
+        var split2 = image.SingleChannel(1);
+        var split3 = image.SingleChannel(2);
+
+        Assert.IsTrue(image.IsValid);
+        Assert.IsNotNull(image.Data);
+
+        Assert.IsTrue(split1.IsValid);
+        Assert.AreEqual(split1.Width, width);
+        Assert.AreEqual(split1.Height, height);
+        Assert.AreEqual(split1.Channels, 1);
+
+        Assert.IsTrue(split2.IsValid);
+        Assert.AreEqual(split2.Width, width);
+        Assert.AreEqual(split2.Height, height);
+        Assert.AreEqual(split2.Channels, 1);
+
+        Assert.IsTrue(split3.IsValid);
+        Assert.AreEqual(split3.Width, width);
+        Assert.AreEqual(split3.Height, height);
+        Assert.AreEqual(split3.Channels, 1);
+
+        CollectionAssert.AreEqual(split1.Data.Take(width * height).ToArray(), new byte[] {
+            1,  4,  7,
+            11,  14,  17,
+            21,  24,  27, });
+        CollectionAssert.AreEqual(split2.Data.Take(width * height).ToArray(), new byte[] {
+            2,  5,  8,
+            12,  15,  18,
+            22,  25,  28, });
+        CollectionAssert.AreEqual(split3.Data.Take(width * height).ToArray(), new byte[] {
+            3,  6,  9,
+            13,  16,  19,
+            23,  26,  29, });
+    }
+
+    [TestMethod]
+    public void Split_Channel3()
+    {
+        int width = 3;
+        int height = 3;
+        int channels = 3;
+
+        var data = new byte[] {
+            1, 2, 3,  4, 5, 6,  7, 8, 9,
+            11, 12, 13,  14, 15, 16,  17, 18, 19,
+            21, 22, 23,  24, 25, 26,  27, 28, 29, };
+
+        using var image = new BaseImage<byte>(width, height, channels, data);
+
+        var split = image.SplitChannels();
+
+        var split1 = split[0];
+        var split2 = split[1];
+        var split3 = split[2];
+
+        Assert.IsTrue(image.IsValid);
+        Assert.IsNotNull(image.Data);
+
+        Assert.IsTrue(split1.IsValid);
+        Assert.AreEqual(split1.Width, width);
+        Assert.AreEqual(split1.Height, height);
+        Assert.AreEqual(split1.Channels, 1);
+
+        Assert.IsTrue(split2.IsValid);
+        Assert.AreEqual(split2.Width, width);
+        Assert.AreEqual(split2.Height, height);
+        Assert.AreEqual(split2.Channels, 1);
+
+        Assert.IsTrue(split3.IsValid);
+        Assert.AreEqual(split3.Width, width);
+        Assert.AreEqual(split3.Height, height);
+        Assert.AreEqual(split3.Channels, 1);
+
+        CollectionAssert.AreEqual(split1.Data.Take(width * height).ToArray(), new byte[] {
+            1,  4,  7,
+            11,  14,  17,
+            21,  24,  27, });
+        CollectionAssert.AreEqual(split2.Data.Take(width * height).ToArray(), new byte[] {
+            2,  5,  8,
+            12,  15,  18,
+            22,  25,  28, });
+        CollectionAssert.AreEqual(split3.Data.Take(width * height).ToArray(), new byte[] {
+            3,  6,  9,
+            13,  16,  19,
+            23,  26,  29, });
+    }
+
+    [TestMethod]
+    public void Merge_Channel3()
+    {
+        int width = 3;
+        int height = 3;
+        int channels = 3;
+
+        var data1 = new byte[] {
+            1,  4,  7,
+            11,  14,  17,
+            21,  24,  27, };
+
+        var data2 = new byte[] {
+            2,  5,  8,
+            12,  15,  18,
+            22,  25,  28, };
+
+        var data3 = new byte[] {
+            3,  6,  9,
+            13,  16,  19,
+            23,  26,  29, };
+
+        using var image1 = new BaseImage<byte>(width, height, 1, data1);
+        using var image2 = new BaseImage<byte>(width, height, 1, data2);
+        using var image3 = new BaseImage<byte>(width, height, 1, data3);
+
+        var images = new List<BaseImage<byte>>() { image1, image2, image3 };
+
+        var image = images.MergeChannels();
+
+        Assert.IsTrue(image.IsValid);
+        Assert.IsNotNull(image.Data);
+
+        Assert.AreEqual(image.Width, width);
+        Assert.AreEqual(image.Height, height);
+        Assert.AreEqual(image.Channels, channels);
+
+        CollectionAssert.AreEqual(image.Data.Take(width * height * channels).ToArray(), new byte[]  {
+            1, 2, 3,  4, 5, 6,  7, 8, 9,
+            11, 12, 13,  14, 15, 16,  17, 18, 19,
+            21, 22, 23,  24, 25, 26,  27, 28, 29, });
     }
 }

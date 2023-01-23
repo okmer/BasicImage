@@ -8,26 +8,44 @@ namespace Com.Okmer.BasicImage.Processing.Extensions
 {
     public static class ByteImagePolarizerExtensions
     {
-        public static BaseImage<T> PolarizerChannel<T>(this BaseImage<T> image, int channelIndex)
+        public static List<BaseImage<T>> SplitPolarizers<T>(this BaseImage<T> image, int polarizersHorizontal, int polarizersVectical)
         {
-            if (!image.IsValid) throw new ArgumentException($"{nameof(SingleChannel)}: {nameof(image)} is NOT valid.");
+            if (!image.IsValid) throw new ArgumentException($"{nameof(SplitPolarizers)}: {nameof(image)} is NOT valid.");
 
-            if (channelIndex > image.Channels) throw new ArgumentOutOfRangeException($"{nameof(SingleChannel)}: {nameof(channelIndex)} is out of range.");
+            if (polarizersHorizontal < 1) throw new ArgumentOutOfRangeException($"{nameof(SplitPolarizers)}: {nameof(polarizersHorizontal)} is out of range.");
+
+            if (polarizersVectical < 1) throw new ArgumentOutOfRangeException($"{nameof(SplitPolarizers)}: {nameof(polarizersVectical)} is out of range.");
 
             var result = new BaseImage<T>(image.Width, image.Height, 1);
 
             int width = image.Width;
             int height = image.Height;
+            int channels = image.Channels;
 
-            for (int y = 0; y < height; y++)
+            var images = new List<BaseImage<T>>();
+
+            for(int h=0; h<polarizersHorizontal; h++)
             {
-                for (int x = 0; x < width; x++)
+                for (int v = 0; v < polarizersHorizontal; v++)
                 {
-                    image.PixelSpan(x, y).Slice(channelIndex, 1).CopyTo(result.PixelSpan(x, y));
+                    images.Add(new BaseImage<T>(width / polarizersHorizontal, height / polarizersVectical, channels));
                 }
             }
 
-            return result;
+            for (int y = 0; y < height; y++)
+            {
+                int v = y % polarizersVectical;
+                int vOffset = v * polarizersHorizontal;
+
+                for (int x = 0; x < width; x++)
+                {
+                    int h = x % polarizersHorizontal;
+
+                    image.PixelSpan(x, y).CopyTo(images[vOffset + h].PixelSpan(x / polarizersHorizontal, y / polarizersVectical));
+                }
+            }
+
+            return images;
         }
     }
 }
