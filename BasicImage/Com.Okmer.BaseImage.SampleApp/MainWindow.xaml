@@ -35,6 +35,7 @@
             <Button x:Name="GaussianBlur" Content="Gaussian Blur" Click="GaussianBlur_Click"/>
             <Button x:Name="SobelHorizontal" Content="Sobel Horizontal" Click="SobelHorizontal_Click"/>
             <Button x:Name="SobelVertical" Content="Sobel Vertical" Click="SobelVertical_Click"/>
+            <Button x:Name="LocalExpNorm" Content="Local Exp Norm" Click="LocalExpNorm_Click"/>
         </StackPanel>
     </Grid>
 </Window>

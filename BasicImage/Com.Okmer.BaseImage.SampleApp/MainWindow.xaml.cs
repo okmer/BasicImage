@@ -181,4 +181,12 @@ public partial class MainWindow : Window
 
         OutputImage.Source = output.ToBitmapSource();
     }
+
+    private void LocalExpNorm_Click(object sender, RoutedEventArgs e)
+    {
+        using var image = inputImage.ToByteImage();
+        using var output = image.LocalExposureNormalized();
+
+        OutputImage.Source = output.ToBitmapSource();
+    }
 }
