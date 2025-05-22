@@ -26,7 +26,7 @@ namespace Com.Okmer.BaseImage.SampleApp;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private BitmapImage inputImage = new BitmapImage(new Uri("testimage.jpg", UriKind.Relative));
+    private BitmapImage inputImage = new BitmapImage(new Uri("weld.png", UriKind.Relative));
 
     public MainWindow()
     {
