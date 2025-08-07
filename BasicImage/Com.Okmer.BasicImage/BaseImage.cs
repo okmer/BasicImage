@@ -4,7 +4,7 @@ namespace Com.Okmer.BasicImage;
 
 public class BaseImage<T> : IDisposable
 {
-    private readonly ArrayPool<T>? sharedPool = null;
+    private ArrayPool<T>? sharedPool = null;
 
     public int Width { get; private set; } = 0;
     public int Height { get; private set; } = 0;
@@ -13,7 +13,7 @@ public class BaseImage<T> : IDisposable
 
     public int Stride => Width * Channels;
 
-    public virtual bool IsValid => Data.Length >= Width * Height * Channels;
+    public virtual bool IsValid => Data.Length >= Width * Height * Channels && Width > 0 && Height > 0 && Channels > 0;
 
     public BaseImage(int width, int height, int channels, T[]? data = null)
     {
@@ -46,18 +46,23 @@ public class BaseImage<T> : IDisposable
     {
         if (disposedValue) return;
 
-        if (Data.Length > 0)
+        if (sharedPool != null && Data.Length > 0)
         {
-            sharedPool?.Return(Data); //Only return Data if sharedPool is not Null (hence the '?.').
+            sharedPool.Return(Data, clearArray: true);
+            sharedPool = null; // Prevent double return
         }
 
         Data = Array.Empty<T>();
-
         Width = 0;
         Height = 0;
         Channels = 0;
 
         disposedValue = true;
+
+        if (disposing)
+        {
+            GC.SuppressFinalize(this);
+        }
     }
 
     public void Dispose()

@@ -158,6 +158,7 @@ public class BaseImageProcessingExtensionsTest
         CollectionAssert.AreEqual(rotated.Data?.Take(output.Length).ToArray(), output);
     }
 
+    [TestMethod]
     public void Rotate90_3x3_Channels3()
     {
         var input = new byte[] {
@@ -166,11 +167,11 @@ public class BaseImageProcessingExtensionsTest
             21, 22, 23,  24, 25, 26,  27, 28, 29, };
 
         var output = new byte[] {
-            7, 8, 9,  17, 18, 19,  27, 28, 29,
-            4, 5, 6,  14, 15, 16,  24, 25, 26,
-            1, 2, 3,  11, 12, 13,  21, 22, 23, };
+            21, 22, 23,  11, 12, 13,  1, 2, 3,
+            24, 25, 26,  14, 15, 16,  4, 5, 6,
+            27, 28, 29,  17, 18, 19,  7, 8, 9, };
 
-        using var image = new BaseImage<byte>(3, 1, 3, input);
+        using var image = new BaseImage<byte>(3, 3, 3, input);
 
         using var rotated = image.Rotate90();
 
@@ -253,6 +254,7 @@ public class BaseImageProcessingExtensionsTest
         CollectionAssert.AreEqual(rotated.Data?.Take(output.Length).ToArray(), output);
     }
 
+    [TestMethod]
     public void Rotate270_3x3_Channels3()
     {
         var input = new byte[] {
@@ -261,9 +263,9 @@ public class BaseImageProcessingExtensionsTest
             21, 22, 23,  24, 25, 26,  27, 28, 29, };
 
         var output = new byte[] {
-            27, 28, 29,  24, 25, 26,  21, 22, 23,
-            17, 18, 19,  14, 15, 16,  11, 12, 13,
-            7, 8, 9,  4, 5, 6,  1, 2, 3, };
+            7, 8, 9,  17, 18, 19,  27, 28, 29,
+            4, 5, 6,  14, 15, 16,  24, 25, 26,
+            1, 2, 3,   11, 12, 13,  21, 22, 23, };
 
         using var image = new BaseImage<byte>(3, 3, 3, input);
 

@@ -10,7 +10,9 @@ public static class BaseImageProcessingExtensions
 {
     public static BaseImage<T> FlipY<T>(this BaseImage<T> image)
     {
-        if (!image.IsValid) throw new ArgumentException($"{nameof(FlipY)}: {nameof(image)} is NOT valid.");
+        ArgumentNullException.ThrowIfNull(image);
+        if (!image.IsValid)
+            throw new ArgumentException($"Image is invalid: W={image.Width}, H={image.Height}, C={image.Channels}", nameof(image));
 
         var result = new BaseImage<T>(image.Width, image.Height, image.Channels);
 
@@ -32,7 +34,9 @@ public static class BaseImageProcessingExtensions
 
     public static BaseImage<T> FlipX<T>(this BaseImage<T> image)
     {
-        if (!image.IsValid) throw new ArgumentException($"{nameof(FlipX)}: {nameof(image)} is NOT valid.");
+        ArgumentNullException.ThrowIfNull(image);
+        if (!image.IsValid)
+            throw new ArgumentException($"Image is invalid: W={image.Width}, H={image.Height}, C={image.Channels}", nameof(image));
 
         int width = image.Width;
         int height = image.Height;
@@ -68,7 +72,9 @@ public static class BaseImageProcessingExtensions
 
     public static BaseImage<T> SwapXY<T>(this BaseImage<T> image)
     {
-        if (!image.IsValid) throw new ArgumentException($"{nameof(SwapXY)}: {nameof(image)} is NOT valid.");
+        ArgumentNullException.ThrowIfNull(image);
+        if (!image.IsValid)
+            throw new ArgumentException($"Image is invalid: W={image.Width}, H={image.Height}, C={image.Channels}", nameof(image));
 
         var result = new BaseImage<T>(image.Height, image.Width, image.Channels);
 
@@ -88,7 +94,9 @@ public static class BaseImageProcessingExtensions
 
     public static BaseImage<T> Rotate90<T>(this BaseImage<T> image)
     {
-        if (!image.IsValid) throw new ArgumentException($"{nameof(Rotate90)}: {nameof(image)} is NOT valid.");
+        ArgumentNullException.ThrowIfNull(image);
+        if (!image.IsValid)
+            throw new ArgumentException($"Image is invalid: W={image.Width}, H={image.Height}, C={image.Channels}", nameof(image));
 
         var result = new BaseImage<T>(image.Height, image.Width, image.Channels);
 
@@ -109,7 +117,9 @@ public static class BaseImageProcessingExtensions
 
     public static BaseImage<T> Rotate180<T>(this BaseImage<T> image)
     {
-        if (!image.IsValid) throw new ArgumentException($"{nameof(Rotate180)}: {nameof(image)} is NOT valid.");
+        ArgumentNullException.ThrowIfNull(image);
+        if (!image.IsValid)
+            throw new ArgumentException($"Image is invalid: W={image.Width}, H={image.Height}, C={image.Channels}", nameof(image));
 
         var result = new BaseImage<T>(image.Width, image.Height, image.Channels);
 
@@ -131,7 +141,9 @@ public static class BaseImageProcessingExtensions
 
     public static BaseImage<T> Rotate270<T>(this BaseImage<T> image)
     {
-        if (!image.IsValid) throw new ArgumentException($"{nameof(Rotate270)}: {nameof(image)} is NOT valid.");
+        ArgumentNullException.ThrowIfNull(image);
+        if (!image.IsValid)
+            throw new ArgumentException($"Image is invalid: W={image.Width}, H={image.Height}, C={image.Channels}", nameof(image));
 
         var result = new BaseImage<T>(image.Height, image.Width, image.Channels);
 

@@ -31,7 +31,8 @@ public static class BaseImageExtensions
     {
         if (!image.IsValid) throw new ArgumentException($"{nameof(SingleChannel)}: {nameof(image)} is NOT valid.");
 
-        if (channelIndex > image.Channels) throw new ArgumentOutOfRangeException($"{nameof(SingleChannel)}: {nameof(channelIndex)} is out of range.");
+        if (channelIndex >= image.Channels)
+            throw new ArgumentOutOfRangeException($"{nameof(SingleChannel)}: {nameof(channelIndex)} is out of range.");
 
         var result = new BaseImage<T>(image.Width, image.Height, 1);
 
@@ -110,12 +111,25 @@ public static class BaseImageExtensions
 
         return image;
     }
+    public static Span<T> PixelSpan<T>(this BaseImage<T> image, int x, int y)
+    {
+        ArgumentNullException.ThrowIfNull(image);
+        if (x < 0 || x >= image.Width || y < 0 || y >= image.Height)
+            throw new ArgumentOutOfRangeException($"Pixel coordinates ({x}, {y}) out of bounds for image ({image.Width}x{image.Height})");
 
-    public static Span<T> PixelSpan<T>(this BaseImage<T> image, int x, int y) => image.Data.AsSpan(y * image.Stride + x * image.Channels, image.Channels);
+        return image.Data.AsSpan(y * image.Stride + x * image.Channels, image.Channels);
+    }
 
-    public static T[] PixelArray<T>(this BaseImage<T> image, int x, int y) => image.PixelSpan(x, y).ToArray();
+    public static Span<T> LineSpan<T>(this BaseImage<T> image, int y)
+    {
+        ArgumentNullException.ThrowIfNull(image);
+        if (y < 0 || y >= image.Height)
+            throw new ArgumentOutOfRangeException($"Line coordinate ({y}) out of bounds for image ({image.Width}x{image.Height})");
 
-    public static Span<T> LineSpan<T>(this BaseImage<T> image, int y) => image.Data.AsSpan(y * image.Stride, image.Stride);
+        return image.Data.AsSpan(y * image.Stride, image.Stride);
+    }
 
-    public static T[] LineArray<T>(this BaseImage<T> image, int x, int y) => image.LineSpan(y).ToArray();
+    public static ReadOnlySpan<T> ReadOnlyPixelSpan<T>(this BaseImage<T> image, int x, int y) => image.PixelSpan(x, y);
+
+    public static ReadOnlySpan<T> ReadOnlyLineSpan<T>(this BaseImage<T> image, int y) => image.ReadOnlyLineSpan(y);
 }
