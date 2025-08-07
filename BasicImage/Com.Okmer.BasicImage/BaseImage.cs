@@ -17,19 +17,31 @@ public class BaseImage<T> : IDisposable
 
     public BaseImage(int width, int height, int channels, T[]? data = null)
     {
+        // Input validation
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(width, nameof(width));
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(height, nameof(height));
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(channels, nameof(channels));
+        
+        // Check for overflow
+        if ((long)width * height * channels > int.MaxValue)
+            throw new ArgumentOutOfRangeException("Image dimensions would exceed maximum array size");
+        
         Width = width;
         Height = height;
         Channels = channels;
-
+        
+        var requiredLength = Width * Height * Channels;
+        
         if (data is null)
         {
             sharedPool = ArrayPool<T>.Shared;
-            Data = sharedPool.Rent(Height * Stride);
+            Data = sharedPool.Rent(requiredLength);
         }
         else
         {
-            if (data.Length < Width * Height * Channels) throw new ArgumentOutOfRangeException($"BaseImage: Data buffer {nameof(data)} is to small for the image dimensions.");
-
+            if (data.Length < requiredLength)
+                throw new ArgumentOutOfRangeException(nameof(data), 
+                    $"Data buffer too small: {data.Length} < {requiredLength}");
             Data = data;
         }
     }
