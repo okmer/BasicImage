@@ -43,7 +43,7 @@ public static class BaseImageExtensions
         {
             for (int x = 0; x < width; x++)
             {
-                image.PixelSpan(x, y).Slice(channelIndex, 1).CopyTo(result.PixelSpan(x, y));
+                image.ReadOnlyPixelSpan(x, y).Slice(channelIndex, 1).CopyTo(result.PixelSpan(x, y));
             }
         }
 
@@ -129,7 +129,41 @@ public static class BaseImageExtensions
         return image.Data.AsSpan(y * image.Stride, image.Stride);
     }
 
-    public static ReadOnlySpan<T> ReadOnlyPixelSpan<T>(this BaseImage<T> image, int x, int y) => image.PixelSpan(x, y);
+    public static ReadOnlySpan<T> ReadOnlyPixelSpan<T>(this BaseImage<T> image, int x, int y)
+    {
+        ArgumentNullException.ThrowIfNull(image);
+        if (x < 0 || x >= image.Width || y < 0 || y >= image.Height)
+            throw new ArgumentOutOfRangeException($"Coordinates ({x}, {y}) out of bounds");
 
-    public static ReadOnlySpan<T> ReadOnlyLineSpan<T>(this BaseImage<T> image, int y) => image.ReadOnlyLineSpan(y);
+        return new ReadOnlySpan<T>(image.Data, y * image.Stride + x * image.Channels, image.Channels);
+    }
+
+    public static ReadOnlySpan<T> ReadOnlyLineSpan<T>(this BaseImage<T> image, int y)
+    {
+        ArgumentNullException.ThrowIfNull(image);
+        if (y < 0 || y >= image.Height)
+            throw new ArgumentOutOfRangeException($"Line {y} out of bounds");
+
+        return new ReadOnlySpan<T>(image.Data, y * image.Stride, image.Stride);
+    }
+
+    public static bool TryGetPixelSpan<T>(this BaseImage<T> image, int x, int y, out Span<T> pixelSpan)
+    {
+        pixelSpan = default;
+        if (image == null || x < 0 || x >= image.Width || y < 0 || y >= image.Height)
+            return false;
+
+        pixelSpan = image.Data.AsSpan(y * image.Stride + x * image.Channels, image.Channels);
+        return true;
+    }
+
+    public static bool TryGetLineSpan<T>(this BaseImage<T> image, int y, out Span<T> pixelSpan)
+    {
+        pixelSpan = default;
+        if (image == null || y < 0 || y >= image.Height)
+            return false;
+
+        pixelSpan = image.Data.AsSpan(y * image.Stride, image.Stride);
+        return true;
+    }
 }

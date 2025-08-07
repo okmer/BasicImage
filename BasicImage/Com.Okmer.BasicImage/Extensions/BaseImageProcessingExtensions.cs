@@ -20,7 +20,7 @@ public static class BaseImageProcessingExtensions
         int stride = image.Stride;
         int lenght = height * stride;
 
-        var inputSpan = new Span<T>(image.Data, 0, lenght);
+        var inputSpan = new ReadOnlySpan<T>(image.Data, 0, lenght);
         var outputSpan = new Span<T>(result.Data, 0, lenght);
 
         for (int y = 0; y < height; y++)
@@ -63,7 +63,7 @@ public static class BaseImageProcessingExtensions
             for (int x = 0; x < width; x++)
             {
                 int x_inverted = (width - 1) - x;
-                image.PixelSpan(x, y).CopyTo(result.PixelSpan(x_inverted, y));
+                image.ReadOnlyPixelSpan(x, y).CopyTo(result.PixelSpan(x_inverted, y));
             }
         }
 
@@ -85,7 +85,7 @@ public static class BaseImageProcessingExtensions
         {
             for (int x = 0; x < width; x++)
             {
-                image.PixelSpan(x, y).CopyTo(result.PixelSpan(y, x));
+                image.ReadOnlyPixelSpan(x, y).CopyTo(result.PixelSpan(y, x));
             }
         }
 
@@ -108,7 +108,7 @@ public static class BaseImageProcessingExtensions
             int y_inverted = (height - 1) - y;
             for (int x = 0; x < width; x++)
             {
-                image.PixelSpan(x, y).CopyTo(result.PixelSpan(y_inverted, x));
+                image.ReadOnlyPixelSpan(x, y).CopyTo(result.PixelSpan(y_inverted, x));
             }
         }
 
@@ -132,7 +132,7 @@ public static class BaseImageProcessingExtensions
             for (int x = 0; x < width; x++)
             {
                 int x_inverted = (width - 1) - x;
-                image.PixelSpan(x, y).CopyTo(result.PixelSpan(x_inverted, y_inverted));
+                image.ReadOnlyPixelSpan(x, y).CopyTo(result.PixelSpan(x_inverted, y_inverted));
             }
         }
 
@@ -155,7 +155,7 @@ public static class BaseImageProcessingExtensions
             int x_inverted = (width - 1) - x;
             for (int y = 0; y < height; y++)
             {
-                image.PixelSpan(x, y).CopyTo(result.PixelSpan(y, x_inverted));
+                image.ReadOnlyPixelSpan(x, y).CopyTo(result.PixelSpan(y, x_inverted));
             }
         }
 
