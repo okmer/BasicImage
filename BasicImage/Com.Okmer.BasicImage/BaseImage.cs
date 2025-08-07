@@ -40,25 +40,35 @@ public class BaseImage<T> : IDisposable
     }
 
     #region IDisposable Support
-    private bool disposedValue = false;
+    private readonly object disposeLock = new object();
+    private volatile bool disposedValue = false;
 
     protected virtual void Dispose(bool disposing)
     {
         if (disposedValue) return;
-
-        if (sharedPool != null && Data.Length > 0)
+        
+        lock (disposeLock)
         {
-            sharedPool.Return(Data, clearArray: true);
-            sharedPool = null; // Prevent double return
+            if (disposedValue) return;
+            
+            var poolToReturn = Interlocked.Exchange(ref sharedPool, null);
+            if (poolToReturn != null && Data.Length > 0)
+            {
+                try
+                {
+                    poolToReturn.Return(Data, clearArray: true);
+                }
+                catch
+                {
+                    // Log but don't throw in disposal
+                }
+            }
+            
+            Data = Array.Empty<T>();
+            Width = Height = Channels = 0;
+            disposedValue = true;
         }
-
-        Data = Array.Empty<T>();
-        Width = 0;
-        Height = 0;
-        Channels = 0;
-
-        disposedValue = true;
-
+        
         if (disposing)
         {
             GC.SuppressFinalize(this);
