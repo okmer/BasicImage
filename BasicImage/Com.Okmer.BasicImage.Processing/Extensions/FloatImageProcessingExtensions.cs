@@ -42,16 +42,26 @@ public static class FloatImageProcessingExtensions
     {
         if (!image.IsValid) throw new ArgumentException($"{nameof(ToByteImage)}: {nameof(image)} is NOT valid.");
 
+        if (multiplier <= 0) throw new ArgumentOutOfRangeException(nameof(multiplier), "Multiplier must be positive");
+
         var result = new BaseImage<byte>(image.Width, image.Height, image.Channels);
 
         int length = image.Height * image.Stride;
 
-        float[]? input = image.Data;
-        byte[]? output = result.Data;
+        var inputSpan = image.Data.AsSpan(0, length);
+        var outputSpan = result.Data.AsSpan(0, length);
 
         for (int i = 0; i < length; i++)
         {
-            output[i] = (byte)Math.Round(input[i] * multiplier);
+            float value = inputSpan[i] * multiplier;
+
+            // Safe conversion with clamping
+            outputSpan[i] = value switch
+            {
+                < 0 => 0,
+                > 255 => 255,
+                _ => (byte)Math.Round(value)
+            };
         }
 
         return result;

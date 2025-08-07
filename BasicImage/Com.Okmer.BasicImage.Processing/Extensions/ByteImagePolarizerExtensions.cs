@@ -8,40 +8,52 @@ namespace Com.Okmer.BasicImage.Processing
 {
     public static class ByteImagePolarizerExtensions
     {
-        public static List<BaseImage<T>> SplitPolarizers<T>(this BaseImage<T> image, int polarizersHorizontal, int polarizersVectical)
+        public static List<BaseImage<T>> SplitPolarizers<T>(this BaseImage<T> image, int polarizersHorizontal, int polarizersVertical)
         {
-            if (!image.IsValid) throw new ArgumentException($"{nameof(SplitPolarizers)}: {nameof(image)} is NOT valid.");
-
-            if (polarizersHorizontal < 1) throw new ArgumentOutOfRangeException($"{nameof(SplitPolarizers)}: {nameof(polarizersHorizontal)} is out of range.");
-
-            if (polarizersVectical < 1) throw new ArgumentOutOfRangeException($"{nameof(SplitPolarizers)}: {nameof(polarizersVectical)} is out of range.");
-
-            var result = new BaseImage<T>(image.Width, image.Height, 1);
+            ArgumentNullException.ThrowIfNull(image);
+            if (!image.IsValid) 
+                throw new ArgumentException($"Image is invalid", nameof(image));
+            
+            ArgumentOutOfRangeException.ThrowIfLessThan(polarizersHorizontal, 1, nameof(polarizersHorizontal));
+            ArgumentOutOfRangeException.ThrowIfLessThan(polarizersVertical, 1, nameof(polarizersVertical));
 
             int width = image.Width;
             int height = image.Height;
             int channels = image.Channels;
+            
+            // Check if image dimensions are divisible by polarizer count
+            if (width % polarizersHorizontal != 0)
+                throw new ArgumentException($"Image width {width} not divisible by horizontal polarizers {polarizersHorizontal}");
+            if (height % polarizersVertical != 0)
+                throw new ArgumentException($"Image height {height} not divisible by vertical polarizers {polarizersVertical}");
 
-            var images = new List<BaseImage<T>>();
+            int subWidth = width / polarizersHorizontal;
+            int subHeight = height / polarizersVertical;
+            
+            var images = new List<BaseImage<T>>(polarizersHorizontal * polarizersVertical);
 
-            for(int h=0; h<polarizersHorizontal; h++)
+            // Create sub-images
+            for (int h = 0; h < polarizersHorizontal; h++)
             {
-                for (int v = 0; v < polarizersVectical; v++)
+                for (int v = 0; v < polarizersVertical; v++)
                 {
-                    images.Add(new BaseImage<T>(width / polarizersHorizontal, height / polarizersVectical, channels));
+                    images.Add(new BaseImage<T>(subWidth, subHeight, channels));
                 }
             }
 
-            for (int y = 0; y < height; y++)
+            // Distribute pixels based on polarizer pattern
+                for (int y = 0; y < height; y++)
             {
-                int v = y % polarizersVectical;
-                int vOffset = v * polarizersHorizontal;
-
+                int vIndex = (y / subHeight) % polarizersVertical;
+                int subY = y % subHeight;
+                
                 for (int x = 0; x < width; x++)
                 {
-                    int h = x % polarizersHorizontal;
-
-                    image.PixelSpan(x, y).CopyTo(images[vOffset + h].PixelSpan(x / polarizersHorizontal, y / polarizersVectical));
+                    int hIndex = (x / subWidth) % polarizersHorizontal;
+                    int subX = x % subWidth;
+                    int imageIndex = vIndex * polarizersHorizontal + hIndex;
+                    
+                    image.PixelSpan(x, y).CopyTo(images[imageIndex].PixelSpan(subX, subY));
                 }
             }
 

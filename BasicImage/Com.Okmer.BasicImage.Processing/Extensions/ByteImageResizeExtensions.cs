@@ -45,13 +45,13 @@ public static class ByteImageResizeExtensions
                 var imagePixelOffset1 = 2 * x * channels;
                 var imagePixelOffset2 = imagePixelOffset1 + channels;
 
-                for (int i = 0; i < channels; i++)
+                for (int c = 0; c < channels; c++)
                 {
-                    output[lineOffset + pixel + i] = (byte)((
-                                                    input[imageLineOffset1 + imagePixelOffset1 + i] +
-                                                    input[imageLineOffset1 + imagePixelOffset2 + i] +
-                                                    input[imageLineOffset2 + imagePixelOffset1 + i] +
-                                                    input[imageLineOffset2 + imagePixelOffset2 + i]
+                    output[lineOffset + pixel + c] = (byte)((
+                                                    input[imageLineOffset1 + imagePixelOffset1 + c] +
+                                                    input[imageLineOffset1 + imagePixelOffset2 + c] +
+                                                    input[imageLineOffset2 + imagePixelOffset1 + c] +
+                                                    input[imageLineOffset2 + imagePixelOffset2 + c]
                                                     ) * 0.25);
                 }
             }

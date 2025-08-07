@@ -352,4 +352,34 @@ public class BaseImageExtensionsTest
 
         CollectionAssert.AreEqual(image.Data.Take(width * height * channels).ToArray(), merge.Data.Take(width * height * channels).ToArray());
     }
+
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentOutOfRangeException))]
+    public void PixelSpan_OutOfBounds_ThrowsException()
+    {
+        using var image = new BaseImage<byte>(3, 3, 1);
+        var _ = image.PixelSpan(-1, 0); // Should throw
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentOutOfRangeException))]
+    public void SingleChannel_InvalidChannel_ThrowsException()
+    {
+        using var image = new BaseImage<byte>(3, 3, 2);
+        var _ = image.SingleChannel(3); // Channel 3 doesn't exist
+    }
+
+    [TestMethod]
+    public void Copy_PreservesDataIntegrity()
+    {
+        var random = new Random(42);
+        var data = new byte[1000];
+        random.NextBytes(data);
+
+        using var original = new BaseImage<byte>(10, 10, 10, data);
+        using var copy = original.Copy();
+
+        CollectionAssert.AreEqual(original.Data.Take(1000).ToArray(),
+                                 copy.Data.Take(1000).ToArray());
+    }
 }
